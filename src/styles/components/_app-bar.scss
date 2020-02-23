@@ -1,0 +1,10 @@
+@use "@material/top-app-bar/mdc-top-app-bar";
+@use '@material/top-app-bar/_index' as top-app-bar;
+@use '@material/theme/color-palette' as material-color;
+
+.top-app-bar {
+    @include top-app-bar.fill-color(#FFF);
+    @include top-app-bar.ink-color(#000);
+
+}
+

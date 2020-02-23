@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@material/theme" with ($primary: #6002ee, $secondary: #fff);
+@use "components/app-bar";
+@use "components/button";
+@use "components/list";
+@use "components/typography";
+@use "body";
+@use "@angular-mdc/theme/material";

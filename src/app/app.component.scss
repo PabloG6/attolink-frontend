@@ -1,0 +1,8 @@
+.body-container {
+    max-width: 720px;
+    margin: auto;
+}
+
+section:not(:first-child) {
+    padding-top: 68px;
+}

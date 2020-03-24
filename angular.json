@@ -20,7 +20,7 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules/",
-                "src/styles"
+                "src/styles/"
               ]
             },
             "outputPath": "dist/attolink",

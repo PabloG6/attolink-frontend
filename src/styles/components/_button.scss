@@ -1,3 +1,22 @@
 @use '@material/button/mdc-button';
+// @use '@material/typography' with ($styles-button: (text-transform: capitalize, font-size: 1rem));
 @use '@material/button';
+@use '@material/theme';
+@include button.core-styles;
+.mdc-button {
+    text-transform: capitalize;
+    font-family: unquote("Raleway");
+}
+.button-primary {
+    @include button.filled-accessible(theme.$primary);
+    text-transform: capitalize;
 
+}
+
+.button-secondary {
+    text-transform: capitalize;
+}
+
+.button-app-bar {
+    text-transform: capitalize;
+}

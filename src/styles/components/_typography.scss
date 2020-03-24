@@ -1,25 +1,8 @@
 @use "./component-variables";
-
-$mdc-typography-font-family: unquote("Cousine, sans-serif");
-$mdc-typography-styles-headline1: (
-    font-family: unquote("Raleway"),
-    font-size: 97
-  );
-
-
-.mdc-typography {
-    font-family: component-variables.$mdc-typography-font-family;
-
-}  
-
-body {
-    --mdc-typography-headline3-font-family: unquote("Raleway");
-}
-.mdc-typography--headline3{
-    font-family: unquote("Raleway");
-    font-size: 48;
+@use "@material/typography" with (
+    $styles-headline3: (
+        font-family: unquote("Raleway")
+      ),
+    $font-family: unquote($string: "Cousine"),
     
-}
-
-
-@import '@material/typography/mdc-typography';
+    );

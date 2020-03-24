@@ -8,3 +8,14 @@
 section:not(:first-child) {
     padding-top: 68px;
 }
+
+.responsive-wrapper {
+    display: none;
+}
+
+@media(min-width: 540px) {
+    .responsive-wrapper {
+        display: inline-flex;
+        
+    }
+}

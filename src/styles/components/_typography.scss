@@ -1,8 +1,11 @@
-@use "./component-variables";
 @use "@material/typography" with (
     $styles-headline3: (
         font-family: unquote("Raleway")
       ),
+    $styles-headline4: (font-family: unquote("Raleway")),
+    $styles-headline5: (font-family: unquote("Raleway")),
+  
     $font-family: unquote($string: "Cousine"),
+    $styles-button: (font-family: unquote("Raleway"))
     
     );

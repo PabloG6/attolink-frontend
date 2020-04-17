@@ -8,6 +8,9 @@ import { FeaturesComponent } from './features/features.component';
 import { FaqComponent } from './faq/faq.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { PricingCardComponent } from './pricing/pricing-card.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     FeaturesComponent,
     FaqComponent,
     DocumentationComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    PricingComponent,
+    PricingCardComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,

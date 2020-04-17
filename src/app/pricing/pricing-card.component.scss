@@ -1,0 +1,44 @@
+li.price__offerings {
+    list-style-image: url("/assets/doughnut.svg");
+    margin-bottom: 8px;
+    
+
+}
+
+li.price__offerings:before {
+    margin-left: 2px;
+}
+
+.card__title {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.card__subtitle {
+    font-family: unquote("Raleway")
+}
+
+.button-primary__stretched {
+    width: 100%;
+
+}
+
+@media(max-width: 540px) {
+    li.price__offerings {
+    list-style-type: none;    
+    list-style-image: none;
+    text-align:center;    
+    }
+
+    ul {
+        padding-inline-start: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.mdc-card {
+    height: 100%;
+    flex: 1 1 auto;
+    justify-content: space-between;
+}

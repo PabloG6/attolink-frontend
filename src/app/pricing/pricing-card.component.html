@@ -1,0 +1,39 @@
+<mdc-card>
+    <div class="card__title">
+        <div mdcHeadline5>{{pricePlan.title}}</div>
+        <p class="card__subtitle">{{pricePlan.description}}</p>
+        <div>${{pricePlan.price}}/month</div>
+    </div>
+
+    <div>
+        <ul>
+            <li class="price__offerings" mdcBody2>
+                {{pricePlan.preview_limit}} requests/hour
+
+            </li>
+            <li class="price__offerings" mdcBody2>
+                Unlimited Api Keys
+            </li>
+
+            <li class="price__offerings" mdcBody2>
+                {{cacheLimitPretty.limit}}{{cacheLimitPretty.unit}}/month cache storage
+            </li>
+
+            <li class="price__offerings" mdcBody2>
+                {{pricePlan.cache_request_limit}} cached web requests
+            </li>
+            <li *ngIf="pricePlan.overage_fees != 0" class="price__offerings" mdcBody2>
+                additional {{pricePlan.overage_fees}}&#162; gb/month in overage fees
+            </li>
+
+        </ul>
+    </div>
+
+    <div></div>
+
+    <mdc-card-actions>
+
+        <button mdc-button raised class="button-primary__stretched">Get Now</button>
+
+    </mdc-card-actions>
+</mdc-card>

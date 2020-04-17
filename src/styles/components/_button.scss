@@ -13,6 +13,13 @@
 
 }
 
+.demo-button {
+    @include button.horizontal-padding(32px);
+    @include button.height(40px);
+    @include button.shape-radius(0);
+    
+}
+
 .button-secondary {
     text-transform: capitalize;
 }

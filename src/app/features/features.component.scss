@@ -1,12 +1,16 @@
 .feature-container {
+    margin-top: 64px;
     display: grid;
     grid-template-columns: 50% 50%;
     justify-items: center;
     align-items: center;
     column-gap: 3rem;
-    
+
 }
 
+img {
+    max-width: 100%;
+}
 
 @media(max-width: 540px) 
 {

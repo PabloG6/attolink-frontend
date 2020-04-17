@@ -1,9 +1,12 @@
 
 @use "@material/theme" with ($primary: #6002ee, $secondary: #fff);
 @use "components/typography";
+@use "components/button";
 @use "components/app-bar";
 @use "components/list";
-@use "components/button";
+@use "components/text-field";
+@use "components/card";
 @use "body";
+
 @use "@material/typography/mdc-typography";
 @use "@angular-mdc/theme/material";

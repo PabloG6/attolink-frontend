@@ -1,0 +1,9 @@
+@use '@material/textfield/mdc-text-field';
+@use "@material/textfield/_index" as textfield;
+@use '@material/form-field/mdc-form-field';
+
+.demo-text-field--outlined {
+    @include textfield.outlined-height(40px);
+    @include textfield.outline-shape-radius(0);
+    width: 100%;
+}

@@ -1,1 +1,60 @@
-<p>welcome-page works!</p>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<mdc-top-app-bar class="top-app-bar" fixed  [fixedAdjustElement]="fixedContent">
+    <mdc-top-app-bar-row>
+      <section class="responsive-wrapper">
+        <mdc-top-app-bar-section align="left">
+          <a href="#demo" mdc-button outlined class="button-app-bar button">
+            <span mdcButtonLabel>See our Demo</span>
+             <mdc-icon>keyboard_arrow_down</mdc-icon>
+          </a>
+          <a href="#documentation" mdc-button outlined class="button-app-bar button">
+            <span mdcButtonLabel>Documentation</span>
+            <mdc-icon>keyboard_arrow_down</mdc-icon>
+          </a>
+          <a href="#features" mdc-button outlined class="button-app-bar button">
+            <span mdcButtonLabel>Features</span>
+            <mdc-icon>keyboard_arrow_down</mdc-icon>
+          </a>
+    
+        </mdc-top-app-bar-section>
+      </section>
+      <mdc-top-app-bar-section align="end">
+        <a mdc-button unelevated class="button-primary button" (click)="signup()">
+          <span mdcButtonLabel >Sign Up</span>
+        </a>
+        <a mdc-button outlined (click)="login()">
+          Login
+        </a>
+      </mdc-top-app-bar-section>
+    </mdc-top-app-bar-row>
+  </mdc-top-app-bar>
+  <div #fixedContent class="body-container">
+  
+    <section id="demo">
+      <app-demo></app-demo>
+    </section>
+    <section id="features">
+      <app-features>
+  
+      </app-features>
+    </section >
+    <section id="documentation">
+      <app-documentation>
+  
+      </app-documentation>
+    </section>
+  
+  
+  
+    <section id="pricing">
+      <app-pricing></app-pricing>
+    </section>
+   
+  </div>

@@ -17,11 +17,16 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "teenielink": [
+        "dist/teenielink/teenielink",
+        "dist/teenielink"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
- 
     "strictInjectionParameters": true
   }
 }

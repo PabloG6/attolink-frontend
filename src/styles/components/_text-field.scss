@@ -7,3 +7,14 @@
     @include textfield.outline-shape-radius(0);
     width: 100%;
 }
+
+.primary-text-field--outlined {
+    @include textfield.outlined-height(48px);
+    @include textfield.outline-shape-radius(4);
+    width: 100%;
+
+}
+
+.form-field--fullwidth {
+    width: 100%;
+}

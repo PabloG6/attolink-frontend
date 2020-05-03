@@ -1,0 +1,26 @@
+<mdc-dialog class="signup-dialog">
+    <mdc-dialog-container>
+        <mdc-dialog-surface>
+            <mdc-dialog-content>
+                <form #signUpForm>
+                    <mdc-form-field fluid>
+                        <mdc-text-field class="text-field--outlined" outlined
+                            label="Email"></mdc-text-field>
+                    </mdc-form-field>
+                    <mdc-form-field fluid>
+                        <mdc-text-field class="text-field--outlined" outlined
+                            label="Password">
+
+                        </mdc-text-field>
+                    </mdc-form-field>
+                    <a [routerLink]="['/password_reset']" mdcCaption>Forgot Password</a>
+                </form>
+            </mdc-dialog-content>
+
+            <span id="signup-link" mdcCaption>Don't have an account? <a [routerLink]="['/signup']">Sign Up here.</a></span>
+            <mdc-dialog-actions>
+                <button mdcDialogButton mdcDialogAction="accept" unelevated>Log in</button>
+            </mdc-dialog-actions>
+        </mdc-dialog-surface>
+    </mdc-dialog-container>
+</mdc-dialog>

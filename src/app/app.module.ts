@@ -11,6 +11,10 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { PricingCardComponent } from './pricing/pricing-card.component';
 import { DemoComponent } from './demo/demo.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginModalComponent } from './login-modal/login-modal.component';
+import { SignupComponent } from './signup/signup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,12 +25,21 @@ import { DemoComponent } from './demo/demo.component';
     WelcomePageComponent,
     PricingComponent,
     PricingCardComponent,
-    DemoComponent
+    DemoComponent,
+    LoginModalComponent,
+    LoginModalComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     MdcModule,
+    HttpClientModule,
+    BrowserAnimationsModule
+  ],
+  entryComponents: [
+    
+    LoginModalComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

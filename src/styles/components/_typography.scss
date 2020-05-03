@@ -5,7 +5,7 @@
     $styles-headline4: (font-family: unquote("Raleway")),
     $styles-headline5: (font-family: unquote("Raleway")),
   
-    $font-family: unquote($string: "Cousine"),
-    $styles-button: (font-family: unquote("Raleway"))
+    $font-family: unquote($string: "Work Sans"),
+    $styles-button: (font-family: unquote("Raleway"), text-transform: "capitalize")
     
     );

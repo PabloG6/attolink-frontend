@@ -1,0 +1,24 @@
+:host {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.signup-holder {
+    max-width: 420px;
+    width: 100%;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.mdc-text-field {
+    margin-top: 8px
+}
+
+#login-link {
+    margin: 8px 0px;
+}

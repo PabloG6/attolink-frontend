@@ -1,0 +1,25 @@
+@use "@material/dialog/_index" as dialog;
+@use "@material/textfield/_index" as textfield;
+
+.text-field--outlined {
+    margin-top: 24px;
+    @include textfield.outline-shape-radius(2px);
+    @include textfield.outlined-height(48px);
+}
+
+.form-field--fullwidth {
+    max-width: 100px;
+    width: 100%
+}
+
+.signup-dialog {
+    @include dialog.max-width(360px, 24px);
+    @include dialog.shape-radius(2px);
+    @include dialog.min-width(420px)
+}
+
+#signup-link {
+    text-align: center;
+    width: 100%;
+    margin-top: -2px;
+}

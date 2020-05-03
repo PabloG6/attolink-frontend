@@ -34,6 +34,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -98,6 +99,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -126,6 +128,46 @@
             "production": {
               "devServerTarget": "attolink:serve:production"
             }
+          }
+        }
+      }
+    },
+    "teenielink": {
+      "projectType": "library",
+      "root": "projects/teenielink",
+      "sourceRoot": "projects/teenielink/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/teenielink/tsconfig.lib.json",
+            "project": "projects/teenielink/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/teenielink/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/teenielink/src/test.ts",
+            "tsConfig": "projects/teenielink/tsconfig.spec.json",
+            "karmaConfig": "projects/teenielink/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/teenielink/tsconfig.lib.json",
+              "projects/teenielink/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

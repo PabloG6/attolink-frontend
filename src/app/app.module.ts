@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgxStripeModule } from 'ngx-stripe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MdcModule } from './mdc/mdc.module';
@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { SignupComponent } from './signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DemoComponent,
     LoginModalComponent,
     LoginModalComponent,
-    SignupComponent
+    SignupComponent,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
+    ReactiveFormsModule,
+  
     MdcModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    NgxStripeModule.forRoot('pk_test_3MvbkHHqMY7UpVvsV6uNDGQq00vgy9Fq89'),
+    BrowserAnimationsModule,
+    CommonModule,
   ],
   entryComponents: [
     

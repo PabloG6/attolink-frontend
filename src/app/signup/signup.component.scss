@@ -1,9 +1,38 @@
+@use '@material/elevation/_index' as elevation;
 :host {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
+}
+
+.StripeElement {
+
+    padding: 4px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    border-radius: 4px;
+    
+}
+
+.StripeElement--focus {
+    @include elevation.elevation(2);
+    border-width: 2px;
+    border-style: solid;
+    transition: border-color 100ms ease-in, border-width 100ms ease-in, 
+                elevation.transition-value(100ms, ease-in);
+    border-color: #6002ee;
+    border-radius: 4px;
+}
+
+.StripeElement--error {
+    @include elevation.elevation(0);
+    border-width: 2px;
+    border-style: solid;
+    transition: border-color 100ms ease-in, border-width 100ms ease-in, 
+                elevation.transition-value(100ms, ease-in);
+    border-color: #c36074;
+    border-radius: 4px;
 }
 
 .signup-holder {
@@ -21,4 +50,30 @@
 
 #login-link {
     margin: 8px 0px;
+}
+
+#price-select-menu {
+    width: 200px;
+}
+
+#price-select {
+    margin-top: 12px;
+}
+
+#price-holder {
+    padding: 0px 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+#stripe-card-element {
+    margin: 12px 0;
+}
+sub {
+    font-size: 0.7rem;
+    font-family: unquote("Work Sans, sans-serif");
 }

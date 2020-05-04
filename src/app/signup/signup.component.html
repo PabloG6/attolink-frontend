@@ -13,18 +13,34 @@
                 </button> -->
         </mdc-text-field>
     </mdc-form-field>
-
-    <mdc-form-field>
-        <mdc-select placeholder="Price" outlined>
-            <mdc-menu [anchorMargin]="{top: 10}">
-                <mdc-list>
-                    <mdc-list-item *ngFor="let subscription of priceSubscriptions" [value]="subscription.price">
-                        {{subscription.name}}
-                    </mdc-list-item>
-                </mdc-list>
-            </mdc-menu>
-        </mdc-select>
+    <mdc-form-field fluid>
+        <mdc-text-field [type]="showPassword ? 'text' : 'password'" label="Repeat your Password" outlined required>
+            <!-- <button mdcIconButton mdcTextFieldIcon trailing [on]="true" (click)="showPassword = !showPassword">
+                    <mdc-icon mdcIconOn>visibility</mdc-icon>
+                    <mdc-icon>visibility_off</mdc-icon>
+                </button> -->
+        </mdc-text-field>
     </mdc-form-field>
+
+    <div id="price-holder">
+        <mdc-form-field  id="price-select">
+            <mdc-select #selectSub placeholder="Price" outlined (selectionChange)="onSelectionChange($event)">
+                <mdc-menu [anchorMargin]="{top: 10}" id="price-select-menu">
+                    <mdc-list>
+                        <mdc-list-item *ngFor="let subscription of priceSubscriptions" [value]="subscription.name">
+                            {{subscription.name}}
+                        </mdc-list-item>
+                    </mdc-list>
+                </mdc-menu>
+            </mdc-select>
+        </mdc-form-field>
+        <span mdcHeadline6>{{selectedPrice | currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
+    </div>
+
+
+        <div id="stripe-card-element" class="field"></div>
+
+
     <span mdcCaption id="login-link">Already a Member? <a [routerLink]="['/']" [queryParams]="{login: true}">Log
             in.</a></span>
     <button mdc-button unelevated>Sign Up</button>

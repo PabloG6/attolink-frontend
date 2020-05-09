@@ -1,48 +1,49 @@
-<div [mdcElevation]="1" class="signup-holder">
-    <mdc-form-field fluid>
-        <mdc-text-field label="Email" outlined required>
 
-        </mdc-text-field>
-    </mdc-form-field>
-
-    <mdc-form-field fluid>
-        <mdc-text-field [type]="showPassword ? 'text' : 'password'" label="Password" outlined required>
-            <!-- <button mdcIconButton mdcTextFieldIcon trailing [on]="true" (click)="showPassword = !showPassword">
-                    <mdc-icon mdcIconOn>visibility</mdc-icon>
-                    <mdc-icon>visibility_off</mdc-icon>
-                </button> -->
-        </mdc-text-field>
-    </mdc-form-field>
-    <mdc-form-field fluid>
-        <mdc-text-field [type]="showPassword ? 'text' : 'password'" label="Repeat your Password" outlined required>
-            <!-- <button mdcIconButton mdcTextFieldIcon trailing [on]="true" (click)="showPassword = !showPassword">
-                    <mdc-icon mdcIconOn>visibility</mdc-icon>
-                    <mdc-icon>visibility_off</mdc-icon>
-                </button> -->
-        </mdc-text-field>
-    </mdc-form-field>
-
-    <div id="price-holder">
-        <mdc-form-field  id="price-select">
-            <mdc-select #selectSub placeholder="Price" outlined (selectionChange)="onSelectionChange($event)">
-                <mdc-menu [anchorMargin]="{top: 10}" id="price-select-menu">
-                    <mdc-list>
-                        <mdc-list-item *ngFor="let subscription of priceSubscriptions" [value]="subscription.name">
-                            {{subscription.name}}
-                        </mdc-list-item>
-                    </mdc-list>
-                </mdc-menu>
-            </mdc-select>
-        </mdc-form-field>
-        <span mdcHeadline6>{{selectedPrice | currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
-    </div>
-
-
-        <div id="stripe-card-element" class="field"></div>
-
-
-    <span mdcCaption id="login-link">Already a Member? <a [routerLink]="['/']" [queryParams]="{login: true}">Log
-            in.</a></span>
-    <button mdc-button unelevated>Sign Up</button>
-
+<div class="page-container animation--entry--page-container">
+    <span mdcHeadline3 style="margin-top: 12px;" class="animation--entry-title-container">Welcome to <font style="font-family: Inconsolata, monospace">teenielink.dev</font></span>
+    <span mdcHeadline4 class="animation--entry-subtitle-container subtitle">Sign Up.</span>
 </div>
+<div class="signup-container">
+    <form [formGroup]="signUpFormGroup"  class="signup-holder">
+        <mdc-form-field fluid>
+            <mdc-text-field label="Email" outlined required formControlName="email">
+    
+            </mdc-text-field>
+        </mdc-form-field>
+    
+        <mdc-form-field fluid>
+            <mdc-text-field [type]="showPassword ? 'text' : 'password'" label="Password" outlined required formControlName="password">
+                <button mdcIconButton mdcTextFieldIcon trailing [on]="true" (click)="showPassword = !showPassword">
+                        <mdc-icon mdcIconOn>visibility</mdc-icon>
+                        <mdc-icon>visibility_off</mdc-icon>
+                    </button>
+            </mdc-text-field>
+        </mdc-form-field>
+    
+    
+        <div id="price-holder">
+            <mdc-form-field  id="price-select">
+                <mdc-select #selectSub placeholder="Price" outlined (selectionChange)="onSelectionChange($event)">
+                    <mdc-menu [anchorMargin]="{top: 10}" id="price-select-menu">
+                        <mdc-list>
+                            <mdc-list-item *ngFor="let subscription of priceSubscriptions" [value]="subscription.name">
+                                {{subscription.name}}
+                            </mdc-list-item>
+                        </mdc-list>
+                    </mdc-menu>
+                </mdc-select>
+            </mdc-form-field>
+            <span mdcHeadline6>{{selectedPrice | currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
+        </div>
+    
+    
+            <div id="stripe-card-element" class="field"></div>
+    
+    
+        <span mdcCaption id="login-link">Already a Member? <a [routerLink]="['/']" [queryParams]="{login: true}">Log
+                in.</a></span>
+        <button mdc-button unelevated [disabled]="signUpFormGroup.invalid" (click)="signup()">Sign Up</button>
+      </form>
+</div>
+
+    

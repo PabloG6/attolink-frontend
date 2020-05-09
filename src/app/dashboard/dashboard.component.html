@@ -1,0 +1,18 @@
+<div class="mdc-drawer-app">
+    <mdc-drawer>
+        <mdc-drawer-content>
+            <mdc-list>
+                <mdc-list-item *ngFor="let route of routes" [routerLink]="route.endpoint" singleSelection>
+                    <mdc-icon mdcListItemGraphic *ngIf="route.icon">{{route.icon}}</mdc-icon>
+                    <span>{{route.label}}</span>
+                </mdc-list-item>
+            </mdc-list>
+    
+        </mdc-drawer-content>
+    </mdc-drawer>
+    
+    <div mdcDrawerAppContent>
+        <router-outlet></router-outlet>
+        
+    </div>
+</div>

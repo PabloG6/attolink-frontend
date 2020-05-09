@@ -11,12 +11,15 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { PricingCardComponent } from './pricing/pricing-card.component';
 import { DemoComponent } from './demo/demo.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { SignupComponent } from './signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiInterceptor } from './api/api.interceptor';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginModalComponent,
     LoginModalComponent,
     SignupComponent,
-    FormsModule,
-    ReactiveFormsModule,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
+    DashboardModule,
     AppRoutingModule, 
     ReactiveFormsModule,
-  
+    
     MdcModule,
     HttpClientModule,
     NgxStripeModule.forRoot('pk_test_3MvbkHHqMY7UpVvsV6uNDGQq00vgy9Fq89'),
@@ -49,7 +52,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     
     LoginModalComponent,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ApiInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

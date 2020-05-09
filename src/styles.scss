@@ -1,6 +1,7 @@
 
 @use "@material/theme" with ($primary: #6002ee, $secondary: #fff);
 @use "components/typography";
+@use "components/drawer";
 @use "components/button";
 @use "components/app-bar";
 @use "components/list";
@@ -10,6 +11,7 @@
 @use "components/iconbutton";
 @use "components/modal";
 @use "components/select";
+@use "components/grid";
 @use "body";
 
 @use "@material/typography/mdc-typography";

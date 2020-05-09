@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TResponse, TUser } from '../models';
+import { TResponse, TUser, TResponseList, TKey } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +19,19 @@ export class ApiService {
      * 
      */
     signup: (email, password): Observable<TResponse<TUser>> => {
-      return this.httpClient.post<TResponse<TUser>>("/signup", {email: email, password: password});
+      return this.httpClient.post<TResponse<TUser>>("/signup", {user: {email: email, password: password}});
     },
 
     login: (email, password): Observable<TResponse<TUser>> => {
-      return this.httpClient.post<TResponse<TUser>>("/login", {email: email, password: password});
+      return this.httpClient.post<TResponse<TUser>>("/login", {user: {email: email, password: password}});
     },
 
     delete: (): Observable<any> => {
       return this.httpClient.delete<any>("/delete");
+    },
+
+    check_token: (token): Observable<any> => {
+      return this.httpClient.get<any>("/auth/check_token", {});
     },
 
     update: (blob) => {
@@ -36,15 +40,16 @@ export class ApiService {
   }
 
   public apikey = {
-    create: () => {
-
+    create: (): Observable<TResponse<TKey>> => {
+      return  this.httpClient.post<TResponse<TKey>>('/keys', {})
     },
 
     delete: () => {
 
     },
     
-    list: () => {
+    list: (): Observable<TResponseList<TKey>> => {
+      return this.httpClient.get<TResponseList<TKey>>("/keys")
 
     }
   }

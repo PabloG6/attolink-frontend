@@ -24,7 +24,6 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
     });
 
-    dialogRef.
     this._subscriptions.push(activatedRoute$);
 
 

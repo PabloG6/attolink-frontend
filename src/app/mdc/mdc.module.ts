@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcIconButtonModule, MdcMenuModule, MdcSelectModule,} from '@angular-mdc/web';
+import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcIconButtonModule, MdcMenuModule, MdcSelectModule, MdcDrawerModule,} from '@angular-mdc/web';
 import { MdcButtonModule } from '@angular-mdc/web';
-
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -20,9 +20,10 @@ import { MdcButtonModule } from '@angular-mdc/web';
     MdcDialogModule,
     MdcIconModule,
     MdcCardModule,
+    MdcDrawerModule,
     MdcSelectModule,
-    MdcMenuModule
-
+    MdcMenuModule,
+    MatTableModule,
 
   ],
   exports: [
@@ -31,6 +32,8 @@ import { MdcButtonModule } from '@angular-mdc/web';
     MdcListModule,
     MdcSelectModule,
     MdcElevationModule,
+    MatTableModule,
+    MdcDrawerModule,
     MdcTextFieldModule,
     MdcIconModule,
     MdcIconModule,

@@ -1,7 +1,11 @@
+@use "@material/theme" with ($primary: #6002ee, $secondary: #fff);
 @use '@material/elevation/_index' as elevation;
+$text-animation-delay: 0.2s;
+$text-duration: 0.4s;
 :host {
     height: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
     justify-content: center;
     align-items: center;
 
@@ -41,7 +45,112 @@
     border-radius: 2px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 16px;
+    max-height: 378px;
+    height: 100%;
+    
+}
+
+@keyframes enterpagetransition{
+    from {
+        transform: translateX(-100%);
+
+
+    }
+
+    to {
+        transform: translateX(0);
+     
+    }
+}
+
+.animation--entry--page-container {
+    animation-name: enterpagetransition;
+    animation-duration: 0.3s;
+  
+    animation-timing-function: ease;
+    animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    animation-iteration-count: 1;
+    
+}
+@keyframes entertitleanimation {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+
+    }
+}
+
+@keyframes entersubtitleanimation {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+
+    }
+}
+.animation--entry-title-container {
+    animation-name: entertitleanimation;
+    animation-duration: $text-duration;
+    animation-delay: $text-animation-delay;
+  
+    animation-timing-function: ease;
+    animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    animation-iteration-count: 1;
+}
+
+.animation--entry-subtitle-container {
+    animation-name: entersubtitleanimation;
+    animation-duration: $text-duration;
+    animation-delay: $text-animation-delay;
+  
+    animation-timing-function: ease;
+    animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    animation-iteration-count: 1;
+}
+.page-container {
+    
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: theme.$secondary;
+    width: auto;
+    transition: max-width 5s ease-out;
+    @include elevation.elevation(4);
+    height: 100%;
+    background-color: theme.$primary;
+
+}
+
+.signup-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+.subtitle {
+    font-family: unquote($string: 'Inconsolata, monospace');
+    margin-top: 1em;
+    font-weight: 700;
+
+
 }
 
 .mdc-text-field {
@@ -55,6 +164,7 @@
 #price-select-menu {
     width: 200px;
 }
+
 
 #price-select {
     margin-top: 12px;
@@ -71,7 +181,7 @@
 }
 
 #stripe-card-element {
-    margin: 12px 0;
+    margin-top: 20px;
 }
 sub {
     font-size: 0.7rem;

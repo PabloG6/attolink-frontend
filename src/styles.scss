@@ -9,12 +9,15 @@
 @use "components/card";
 @use "components/elevation";
 @use "components/iconbutton";
+@use "components/icons";
 @use "components/modal";
 @use "components/select";
 @use "components/grid";
+@use "components/menu";
 @use "body";
 
 @use "@material/typography/mdc-typography";
 @use "@angular-mdc/theme/material";
 
 html, body { height: 100%; }
+

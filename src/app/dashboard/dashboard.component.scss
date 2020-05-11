@@ -5,14 +5,23 @@
 
     
 }
-
+.popup-menu {
+    overflow-x: hidden;
+}
+.menu-list-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .mdc-drawer-app-content {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 136px;    margin-left: 24px;
+    padding-right: 136px;
+    margin-left: 24px;
     height: 100%;
     width: 100%;
 }

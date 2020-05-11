@@ -17,7 +17,7 @@ export class ApiInterceptor implements HttpInterceptor {
                 url: environment.rootUrl + req.urlWithParams,
             }
         );
-
+        console.log(this._cookieService.check(environment.atto_cookie));
         if (this._cookieService.check(environment.atto_cookie)) {
             const token = this._cookieService.get(environment.atto_cookie);
 

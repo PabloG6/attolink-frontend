@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TResponse, TUser, TResponseList, TKey } from '../models';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,9 @@ export class ApiService {
       return  this.httpClient.post<TResponse<TKey>>('/keys', {})
     },
 
-    delete: () => {
-
+    delete: (id): Observable<any> => {
+      return this.httpClient.delete(`/keys/${id}`).pipe(tap(res =>  console.log(res)));
+      
     },
     
     list: (): Observable<TResponseList<TKey>> => {

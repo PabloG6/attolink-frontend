@@ -5,6 +5,7 @@ import { LoginGuard } from '../guards/login.guard';
 import { KeysComponent } from '../keys/keys.component';
 import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { SettingsComponent } from '../settings/settings.component';
+import { DocumentationComponent } from '../documentation/documentation.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: "settings",
         component: SettingsComponent
+      },
+      {
+        path: 'documentation',
+        component: DocumentationComponent,
       }
     ]
     

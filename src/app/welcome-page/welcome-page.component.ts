@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MdcDialog } from '@angular-mdc/web';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { Observable, Subscription } from 'rxjs';
 
@@ -11,15 +11,14 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
-  
-  constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _dialog: MdcDialog) { }
+  showPassword: boolean = false;
+  constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _dialog: MatDialog) { }
 
 
   ngOnInit(): void {
-    let dialogRef;
     const activatedRoute$ = this._activatedRoute.queryParams.subscribe((queryParams: Params) => {
       if(queryParams["login"]) {
-        dialogRef = this._dialog.open(LoginModalComponent, )
+        this._dialog.open(LoginModalComponent, {width: '360px',})
       }
 
     });
@@ -27,9 +26,11 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
     this._subscriptions.push(activatedRoute$);
 
 
+  
   }
 
   public login() {
+    this._dialog.open(LoginModalComponent, {width: '360px'})
   }
 
   public signup() {

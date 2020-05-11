@@ -1,0 +1,10 @@
+<div class="dialog-content">
+    <mdc-icon class="icon--large">delete_outline</mdc-icon>
+<span mdcHeadline5>Are you sure you want to delete this key?</span>
+<span mdcBody1 class="text--secondary">You will not be able to recover it.</span>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mdcDialogButton mdcDialogAction="accept" unelevated class="neutral-button" mat-dialog-close>Cancel</button>
+    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="delete()"  class="error-button" >Delete</button>
+</mat-dialog-actions>

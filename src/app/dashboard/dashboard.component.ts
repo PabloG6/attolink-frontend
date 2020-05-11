@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TRoutes } from '../models';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,6 +37,28 @@ export class DashboardComponent implements OnInit {
 
 
   ]
+
+  loginRoutes: TRoutes[] = [
+    {
+      endpoint: '/plans',
+      icon: 'monetization_on',
+      label: 'Upgrade your Plan',
+    },
+
+    {
+      endpoint: '/account',
+      icon: 'settings',
+      label: 'Settings',
+    },
+    {
+      endpoint: '/',
+      icon: 'exit_to_app',
+      label: 'Logout',
+    },
+ 
+
+
+  ]
   constructor(private _router: Router) { }
 
   get url() {
@@ -45,4 +68,11 @@ export class DashboardComponent implements OnInit {
     console.log()
   }
 
+  onMenuSelect($event): void {
+    console.log($event);
+  }
+
+  navigate(route) {
+
+  }
 }

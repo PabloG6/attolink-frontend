@@ -24,6 +24,8 @@ export interface TResponseList<T> {
 export interface TKey {
     id: string;
     api_key: string;
+    inserted_at: string;
+    
 }
 export interface AttoSubscription{
     name: string;
@@ -31,3 +33,9 @@ export interface AttoSubscription{
     id?: string;
 }
 
+export interface TRoutes {
+    endpoint: string;
+    icon?: string;
+    label?: string;
+    lambda?: (val: any) => any
+}

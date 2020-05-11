@@ -17,6 +17,14 @@
     
 }
 
+.error-button {
+    @include button.filled-accessible(#ff313b);
+}
+
+.neutral-button {
+    @include button.filled-accessible(#FDFDFD);
+}
+
 .button-secondary {
     text-transform: capitalize;
 }

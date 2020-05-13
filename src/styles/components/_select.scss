@@ -1,2 +1,13 @@
 @use '@material/select/mdc-select';
 @use '@material/select/_index' as select;
+
+.select-width {
+    min-width: 200px;
+    width: 100%;
+    
+}
+
+
+.select--outlined {
+   height: 48px;
+}

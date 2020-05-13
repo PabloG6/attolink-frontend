@@ -7,7 +7,14 @@
 .button-primary {
     @include button.filled-accessible(theme.$primary);
     text-transform: capitalize;
+    @include button.height(44px);
 
+}
+
+.button--text-field {
+    @include button.height(48px);
+    @include button.horizontal-padding(16px);
+    font-size: 0.87rem;
 }
 
 .demo-button {
@@ -16,6 +23,8 @@
     @include button.shape-radius(0);
     
 }
+
+
 
 .error-button {
     @include button.filled-accessible(#ff313b);

@@ -2,16 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcMenuModule, MdcSelectModule, MdcDrawerModule,} from '@angular-mdc/web';
 import { MdcButtonModule } from '@angular-mdc/web';
-import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MdcIconButtonModule} from '@angular-mdc/web/icon-button';
+import {MDCDataTableModule} from '@angular-mdc/web/data-table';
+import {MdcCheckboxModule} from '@angular-mdc/web/checkbox';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MdcCheckboxModule,
     MdcButtonModule,
+    MDCDataTableModule,
     MdcListModule,
     MdcTopAppBarModule,
     MdcIconModule,
@@ -25,17 +28,17 @@ import {MdcIconButtonModule} from '@angular-mdc/web/icon-button';
     MdcDrawerModule,
     MdcSelectModule,
     MdcMenuModule,
-    MatTableModule,
     MatDialogModule,
 
   ],
   exports: [
     MdcButtonModule,
+    MdcCheckboxModule,
     MdcIconButtonModule,
     MdcListModule,
     MdcSelectModule,
     MdcElevationModule,
-    MatTableModule,
+    MDCDataTableModule,
     MatDialogModule,
     MdcDrawerModule,
     MdcTextFieldModule,

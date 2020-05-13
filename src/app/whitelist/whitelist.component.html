@@ -1,1 +1,74 @@
-<p>whitelist works!</p>
+<div class="menu-bar">
+    <mdc-text-field class="primary-text-field--outlined text-field--restricted__360" 
+    label="Origin" placeholder="Enter your host or ip address"
+        outlined>
+
+    </mdc-text-field>
+
+    <mdc-select outlined placeholder="Origin Type" class="select--outlined">
+        <mdc-menu [anchorMargin]="{top: 14}" class="select-width">
+            <mdc-list>
+                <mdc-list-item value="ipv4">
+                    ipv4
+                </mdc-list-item>
+
+                <mdc-list-item value="url">
+                    url
+                </mdc-list-item>
+
+            </mdc-list>
+        </mdc-menu>
+    </mdc-select>
+    <button mdc-button unelevated id="create" (click)="create()" class="bar-button button-primary button--text-field">
+        <mdc-button-label>
+            Create Address
+        </mdc-button-label>
+    </button>
+
+
+</div>
+<div>
+    <div class="text--title__small text--secondary">Restrict IP Setting</div>
+    <mdc-select outlined placeholder="">
+        <mdc-menu [anchorMargin]="{top: 14}" class="select-width">
+            <mdc-list>
+                <mdc-list-item value="all">
+                    All
+                </mdc-list-item>
+                <mdc-list-divider></mdc-list-divider>
+
+                <mdc-list-item value="restricted">
+                    Restricted
+                </mdc-list-item>
+                <mdc-list-divider></mdc-list-divider>
+                <mdc-list-item value="none">
+                    None
+                </mdc-list-item>
+            </mdc-list>
+        </mdc-menu>
+    </mdc-select>
+    <mdc-data-table style="width: 100%; margin-top: 1.25rem;">
+        <table mdcDataTableTable>
+            <tr mdcDataTableHeaderRow>
+                <th mdcDataTableHeaderCell>Date created</th>
+                <th mdcDataTableHeaderCell>Origins</th>
+                <th mdcDataTableHeaderCell>Origin Type</th>
+            </tr>
+            <tbody mdcDataTableContent>
+                <tr mdcDataTableRow *ngFor="let whitelist of ($whitelist | async)?.data ">
+                    <td mdcDataTableCell>{{whitelist.inserted_at | date: 'MMMM dd, yyyy'}}</td>
+                    <td mdcDataTableCell>
+                        {{whitelist.ip_address}}
+                    </td>
+
+                    <td mdcDataCell>
+                        {{whitelist.type}}
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+    </mdc-data-table>
+
+</div>

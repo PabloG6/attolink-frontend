@@ -1,0 +1,5 @@
+@use '@material/data-table/mdc-data-table';
+@use '@material/data-table/_index' as data-table;
+@include data-table.core-styles;
+@include data-table.cell-padding(1rem, 1rem);
+

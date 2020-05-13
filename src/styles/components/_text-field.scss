@@ -8,12 +8,22 @@
     width: 100%;
 }
 
+
 .primary-text-field--outlined {
     @include textfield.outlined-height(48px);
     @include textfield.outline-shape-radius(4);
     width: 100%;
 
 }
+
+.text-field--restricted__360 {
+    max-width: 360px
+}
+
+.text-field--outlined__medium {
+    @include textfield.outlined-height(48px);
+}
+
 
 .form-field--fullwidth {
     width: 100%;

@@ -34,7 +34,8 @@ div.information-list {
 }
 
 table {
-    width: 100%;
+    
+    border-radius: 4px;
 }
 
 .information-list {
@@ -63,9 +64,15 @@ span.column-row {
     justify-content: center;
 }
 
+
+
 div.column-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.super-icon {
+    font-size: 0.9rem
 }

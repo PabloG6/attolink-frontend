@@ -39,3 +39,10 @@ export interface TRoutes {
     label?: string;
     lambda?: (val: any) => any
 }
+
+export interface TWhiteList {
+    id: string;
+    ip_address: string;
+    type: "ipv4" | "url";
+    inserted_at: string;
+}

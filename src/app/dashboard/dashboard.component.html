@@ -1,42 +1,12 @@
-<mdc-top-app-bar [mdcElevation]="2" [fixedAdjustElement]="root" class="top-app-bar" [scrollTarget]="root"
-    style="padding: 0 16px; z-index: 8" fixed>
-    <mdc-top-app-bar-row>
-        <mdc-top-app-bar-section>
-            <span style="font-family: 'Inconsolata, monospace'; font-size: 1.8rem">teenielink.dev</span>
-        </mdc-top-app-bar-section>
-        <mdc-top-app-bar-section align="end">
-            <div mdcMenuSurfaceAnchor #loginAnchor>
-                <button mdc-button (click)="login.open = !login.open">
-                    <mdc-button-label>
-                        grantpablo4@gmail.com
-                    </mdc-button-label>
-                    <mdc-icon>keyboard_arrow_down</mdc-icon>
 
-
-                </button>
-                <mdc-menu #login [anchorElement]="loginAnchor" (selected)="onMenuSelect($event)"
-                    anchorCorner="bottomStart" class="popup-menu" closeSurfaceOnSelection="true">
-                    <mdc-list>
-                        <ng-container *ngFor="let route of loginRoutes">
-                            <mdc-list-item (click)="navigate(route)" class="menu-list-item">
-                                {{route.label}}
-                                <mdc-icon mdcListItemGraphic>{{route.icon}}</mdc-icon>
-                            </mdc-list-item>
-                        </ng-container>
-                    </mdc-list>
-                </mdc-menu>
-            </div>
-
-
-
-
-        </mdc-top-app-bar-section>
-    </mdc-top-app-bar-row>
-</mdc-top-app-bar>
 <div class="mdc-drawer-app" #root>
+
     <mdc-drawer>
+        <mdc-drawer-header title="teenielink.dev" subtitle="Lorem Ipsum Bullshit."></mdc-drawer-header>
+
         <mdc-drawer-content>
             <mdc-list>
+                <mdc-list-divider></mdc-list-divider>
                 <mdc-list-item *ngFor="let route of routes" [routerLink]="route.endpoint" singleSelection>
                     <mdc-icon mdcListItemGraphic *ngIf="route.icon">{{route.icon}}</mdc-icon>
                     <span>{{route.label}}</span>

@@ -12,9 +12,9 @@
 }
 
 .button--text-field {
-    @include button.height(48px);
+    @include button.height(56px);
     @include button.horizontal-padding(16px);
-    font-size: 0.87rem;
+    font-size: 0.925rem;
 }
 
 .demo-button {

@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 export interface TResponse<T> {
     data: T
 }
@@ -46,3 +48,4 @@ export interface TWhiteList {
     type: "ipv4" | "url";
     inserted_at: string;
 }
+

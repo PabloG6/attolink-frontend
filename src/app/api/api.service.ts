@@ -58,7 +58,7 @@ export class ApiService {
 
   public whitelist = {
     create: (ip_address: string, type: 'url' | 'ipv4' | 'ipv6'): Observable<TResponse<TWhiteList>> => {
-      return this.httpClient.post<TResponse<TWhiteList>>('/whitelist', {ip_address: ip_address, type: type})
+      return this.httpClient.post<TResponse<TWhiteList>>('/whitelist', {white_list: {ip_address: ip_address, type: type}})
     },
 
     list: (): Observable<TResponseList<TWhiteList>> => {

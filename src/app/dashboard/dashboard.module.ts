@@ -6,6 +6,7 @@ import { MdcModule } from '../mdc/mdc.module';
 import { KeysComponent } from '../keys/keys.component';
 import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { SettingsComponent } from '../settings/settings.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { SettingsComponent } from '../settings/settings.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MdcModule,
   ]
 })

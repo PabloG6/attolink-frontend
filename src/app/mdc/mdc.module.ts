@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcMenuModule, MdcSelectModule, MdcDrawerModule,} from '@angular-mdc/web';
+import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcMenuModule, MdcDrawerModule,} from '@angular-mdc/web';
 import { MdcButtonModule } from '@angular-mdc/web';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MdcIconButtonModule} from '@angular-mdc/web/icon-button';
 import {MDCDataTableModule} from '@angular-mdc/web/data-table';
 import {MdcCheckboxModule} from '@angular-mdc/web/checkbox';
-
+import {MdcSelectModule} from '@angular-mdc/web/select';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import {MdcCheckboxModule} from '@angular-mdc/web/checkbox';
     MdcIconModule,
     MdcCardModule,
     MdcDrawerModule,
+    MatInputModule,
     MdcSelectModule,
     MdcMenuModule,
     MatDialogModule,
@@ -36,6 +38,7 @@ import {MdcCheckboxModule} from '@angular-mdc/web/checkbox';
     MdcCheckboxModule,
     MdcIconButtonModule,
     MdcListModule,
+    MatInputModule,
     MdcSelectModule,
     MdcElevationModule,
     MDCDataTableModule,

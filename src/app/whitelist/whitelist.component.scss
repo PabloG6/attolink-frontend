@@ -68,6 +68,10 @@ span.column-row {
     justify-content: center;
 }
 
+.margin--outlined {
+    margin-bottom: 19px;
+}
+
 
 
 div.column-row {
@@ -75,4 +79,8 @@ div.column-row {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.mdc-select__anchor {
+    height: 48px;
 }

@@ -20,6 +20,10 @@
     max-width: 360px
 }
 
+
+.text-field__100 {
+    width: 100%;
+}
 .text-field--outlined__medium {
     @include textfield.outlined-height(48px);
 }

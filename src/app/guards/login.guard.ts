@@ -19,6 +19,7 @@ export class LoginGuard implements CanActivate, CanLoad {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     if(!this._cookieService.check(environment.atto_cookie)){
+      this._router.navigate(['/']);
       return false;
     }
     

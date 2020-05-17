@@ -1,21 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { Observable } from 'rxjs';
 import { TWhiteList } from '../models';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
-import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl, NgForm, FormGroupDirective, FormControl } from '@angular/forms';
 import { MdcSelect, MdcSelectChange } from '@angular-mdc/web';
 import { OriginValidators } from '../validators/origin.validator';
 import { HttpErrorResponse } from '@angular/common/http';
+import {SubSink} from 'subsink';
+import { WhiteListErrorStateMatcher } from '../validators/whitelist.errorstatematcher';
 
 @Component({
   selector: 'app-whitelist',
   templateUrl: './whitelist.component.html',
   styleUrls: ['./whitelist.component.scss']
 })
-export class WhitelistComponent implements OnInit {
+export class WhitelistComponent implements OnInit, OnDestroy {
+  
   $whitelist: Observable<any>
+  private _subs = new SubSink();
   displayedColumns: string[] = ["date created", "keys"]
   loadingImage: boolean;
   @ViewChild('originSelect', {static: true}) originSelect: MdcSelect;
@@ -24,12 +28,16 @@ export class WhitelistComponent implements OnInit {
     {origin_name: "url", origin_type: "url" , placeholder: "Enter your domain name"}
   ]
   whitelistFormGroup: FormGroup;
+  whiteListMatcher = new WhiteListErrorStateMatcher();
+  restrictedControl: FormControl = new FormControl('all');
   private _placeholder: string;
   constructor(private _api: ApiService, private _matDialog: MatDialog, private _fb: FormBuilder) { 
     this.whitelistFormGroup = _fb.group({
-      whitelist: ['', [Validators.required],],
-      origin_type: ['url', [Validators.required,]],
+      whitelist: ['', [],],
+      origin_type: [this.originTypes[1], [Validators.required,]],
     }, {validators: OriginValidators.originPattern});
+
+  
 
     
   }
@@ -44,19 +52,19 @@ export class WhitelistComponent implements OnInit {
   ngOnInit(): void {
     this.$whitelist = this._api.whitelist.list();
     this._api.whitelist.list().subscribe((res) => {
-      console.log(res);
     });
+    this._subs.sink = this.$whitelist.subscribe(() => {
 
+    })
   }
 
-  create() {
+  create(menuForm: FormGroupDirective) {
     this.loadingImage = true;
     this._api.whitelist.create(this.whitelistFormGroup.value.whitelist, this.whitelistFormGroup.value.origin_type.origin_name).subscribe(_ => {
-      console.log("hello world");
       this.$whitelist = this._api.whitelist.list()
-      this.whitelistFormGroup.reset();
-      this.whitelistFormGroup.clearValidators();
-
+      menuForm.resetForm();
+      menuForm.reset();
+      this.whitelistFormGroup.get('whitelist').setErrors(null);
     }, (response: HttpErrorResponse) => {
         console.log(response.error);
         const error = response.error;
@@ -70,35 +78,45 @@ export class WhitelistComponent implements OnInit {
           return;
         }
 
-        console.log('whiteListFormGroup:', this.whitelistFormGroup.errors);
-        console.log(`error:`, error)
     });
   }
 
 
-  delete(whitelist: TWhiteList): void {
-    this._matDialog.open(DeleteModalComponent, {data: whitelist, width: '360px', autoFocus: false, disableClose: true}).afterClosed().subscribe(val => {
-      if(val.success) {
-        this.$whitelist = this._api.whitelist.list();
-      }
-    });
-  }
+ 
 
 
   get validationMessage() {
-    return this.whitelistFormGroup.get('whitelist').errors.ip_address || "This format is incorrect. " || null;
+    console.log(this.whitelistFormGroup.get('whitelist').errors);
+    return this.whitelistFormGroup.get('whitelist').errors ? this.whitelistFormGroup.get('whitelist').errors.message: null;
   }
 
   
 
-  updateRules() {
 
-  }
   onSelectionChange($event: MdcSelectChange): void {
     this.placeholder = $event.value.placeholder;
     
   }
 
+  onRestrictSelectionChange($event: MdcSelectChange): void {
+
+  }
+
+
+  delete(whitelist: TWhiteList) {
+  
+    const $delete = this._api.whitelist.delete(whitelist.id);
+    const dialogRef = this._matDialog.open(DeleteModalComponent, {data: {observable: $delete}, autoFocus: false, disableClose: true, width: '360px'});
+    dialogRef.afterClosed().subscribe((info) => {
+      if(info.success) {
+        
+        this.$whitelist = this._api.whitelist.list();
+      }
+    })
+  }
+  ngOnDestroy():void {
+    this._subs.unsubscribe();
+  }
 
 
   

@@ -1,14 +1,16 @@
-<form class="menu-bar" [formGroup]="whitelistFormGroup">
-    <mdc-form-field>
-        <mdc-text-field class="text-field__100 text-field--restricted__360" formControlName="whitelist" label="Origin"
-            [placeholder]="placeholder">
+<form class="menu-bar" [formGroup]="whitelistFormGroup" #menuForm="ngForm">
+    <mdc-form-field fluid class="text-field_100 text-field--restricted__360">
+        <mdc-text-field  formControlName="whitelist" label="Origin"
+            [placeholder]="placeholder"  outlined required [errorStateMatcher]="whiteListMatcher">
 
         </mdc-text-field>
-        <span *ngIf="whitelistFormGroup.invalid && validationMessage != null">{{validationMessage}}</span>
+        <span class="text-field--errors" *ngIf="whitelistFormGroup.invalid && validationMessage != null">{{validationMessage}}</span>
+
     </mdc-form-field>
 
 
     <mdc-select #originSelect placeholder="Origin Type" formControlName="origin_type" class="select--outlined" outlined
+      
         (selectionChange)="onSelectionChange($event)">
         <mdc-menu [anchorMargin]="{top: 54}" class="select-width">
             <mdc-list>
@@ -20,7 +22,7 @@
             </mdc-list>
         </mdc-menu>
     </mdc-select>
-    <button mdc-button unelevated id="create" (click)="create()" class="bar-button button-primary button--text-field"
+    <button mdc-button unelevated id="create" (click)="create(menuForm)" class="bar-button button-primary button--text-field"
         [disabled]="whitelistFormGroup.invalid">
         <mdc-button-label>
             Create Address
@@ -31,20 +33,20 @@
 </form>
 <div>
     <div class="text--title__small text--secondary">Restrict IP Setting</div>
-    <mdc-select outlined placeholder="">
-        <mdc-menu [anchorMargin]="{top: 14}" class="select-width">
+    <mdc-select outlined placeholder="" [formControl]="restrictedControl" (selectionChange)="onRestrictSelectionChange($event)">
+        <mdc-menu [anchorMargin]="{top: 14}" class="select-width" >
             <mdc-list>
                 <mdc-list-item value="all">
-                    All
+                    Accept All
                 </mdc-list-item>
                 <mdc-list-divider></mdc-list-divider>
 
                 <mdc-list-item value="restricted">
-                    Restricted
+                    Restrict to List
                 </mdc-list-item>
                 <mdc-list-divider></mdc-list-divider>
                 <mdc-list-item value="none">
-                    None
+                    Stop All
                 </mdc-list-item>
             </mdc-list>
         </mdc-menu>
@@ -55,6 +57,7 @@
                 <th mdcDataTableHeaderCell>Date created</th>
                 <th mdcDataTableHeaderCell>Origins</th>
                 <th mdcDataTableHeaderCell>Origin Type</th>
+                <th mdcDataTableHeaderCell>Settings</th>
             </tr>
             <tbody mdcDataTableContent>
                 <tr mdcDataTableRow *ngFor="let whitelist of ($whitelist | async)?.data ">
@@ -63,10 +66,16 @@
                         {{whitelist.ip_address}}
                     </td>
 
-                    <td mdcDataTableCell
-                        style="font-family: 'Inconsolata', monospace; font-size: 1.1rem; font-weight: 500">
+                    <td mdcDataTableCell>
                         {{whitelist.type}}
                     </td>
+
+                    <td mdcDataTableCell>
+                        <button mdc-icon-button (click)="delete(whitelist)">
+                            <mdc-icon>delete_outline</mdc-icon>
+                        </button>
+                    </td>
+
 
                 </tr>
             </tbody>

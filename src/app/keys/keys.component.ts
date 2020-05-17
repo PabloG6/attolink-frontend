@@ -36,7 +36,8 @@ export class KeysComponent implements OnInit, OnDestroy {
   }
 
   delete(key: TKey): void {
-    this._matDialog.open(DeleteModalComponent, {data: key, width: '360px', autoFocus: false, disableClose: true}).afterClosed().subscribe(val => {
+    const $delete = this._api.apikey.delete(key.id);
+    this._matDialog.open(DeleteModalComponent, {data: {observable: $delete}, width: '360px', autoFocus: false, disableClose: true}).afterClosed().subscribe(val => {
       if(val.success) {
         this.$keys = this._api.apikey.list();
       }

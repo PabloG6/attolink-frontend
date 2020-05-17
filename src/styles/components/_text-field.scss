@@ -28,6 +28,14 @@
     @include textfield.outlined-height(48px);
 }
 
+.text-field--errors {
+    position: absolute;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    color: #ee2c35;
+    top: 84px;
+}
+
 
 .form-field--fullwidth {
     width: 100%;

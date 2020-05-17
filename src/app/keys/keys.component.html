@@ -19,6 +19,11 @@
                 <td mdcDataTableCell>
                 {{key.api_key}} 
                 </td>
+                <td mdcDataTableCell>
+                    <button mdc-icon-button (click)="delete(key)">
+                        <mdc-icon>delete_outline</mdc-icon>
+                    </button>
+                </td>
 
             </tr>
         </tbody>

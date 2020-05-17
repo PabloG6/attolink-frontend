@@ -30,6 +30,7 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   public login() {
+    console.log("login called");
     this._dialog.open(LoginModalComponent, {width: '360px'})
   }
 

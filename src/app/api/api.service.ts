@@ -65,8 +65,8 @@ export class ApiService {
       return this.httpClient.get<TResponseList<TWhiteList>>('/whitelist');
     },
 
-    delete: (id): Observable<TResponse<TWhiteList>> => {
-      return this.httpClient.delete<TResponse<TWhiteList>>(`whitelist/${id}`);
+    delete: (id): Observable<any> => {
+      return this.httpClient.delete<any>(`whitelist/${id}`);
     }
   }
 }

@@ -37,6 +37,7 @@ export class LoginModalComponent implements OnInit {
     this._api.user.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response: TResponse<TUser>) => {
       this._cookieService.set(environment.atto_cookie, response.data.token)
       this._router.navigate(['dashboard']);
+      this._matDialogRef.close();
     })
   }
 

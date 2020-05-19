@@ -20,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiInterceptor } from './api/api.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,6 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     LoginModalComponent,
     SignupComponent,
     DashboardComponent,
-    DeleteModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +53,6 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
   entryComponents: [
 
     LoginModalComponent,
-    DeleteModalComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

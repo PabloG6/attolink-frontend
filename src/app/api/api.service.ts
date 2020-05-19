@@ -66,7 +66,7 @@ export class ApiService {
     },
 
     delete: (id): Observable<any> => {
-      return this.httpClient.delete<any>(`whitelist/${id}`);
+      return this.httpClient.delete<any>(`/whitelist/${id}`);
     }
   }
 }

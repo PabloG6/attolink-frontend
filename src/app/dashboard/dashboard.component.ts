@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TRoutes } from '../models';
+import { TRoutes, TGenericModal } from '../models';
+import { MdcDialog } from '@angular-mdc/web';
+import { MatDialog } from '@angular/material/dialog';
+import { GenericModalComponent } from '../generic-modal/generic-modal.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +12,7 @@ import { TRoutes } from '../models';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  routes = [
+  pageRoutes = [
 
     {
       endpoint: "documentation",
@@ -28,38 +32,24 @@ export class DashboardComponent implements OnInit {
       icon: "settings_input_antenna",
       label: "Whitelisted Origins"
     },
-
-    {
-      endpoint: "settings",
-      icon: "settings",
-      label: "Settings",
-    },
-
-
   ]
 
   loginRoutes: TRoutes[] = [
     {
-      endpoint: '/plans',
+      endpoint: 'plans',
       icon: 'monetization_on',
       label: 'Upgrade your Plan',
     },
 
     {
-      endpoint: '/account',
+      endpoint: 'account',
       icon: 'settings',
       label: 'Settings',
     },
-    {
-      endpoint: '/',
-      icon: 'exit_to_app',
-      label: 'Logout',
-    },
- 
 
 
   ]
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _dialog: MatDialog, private _cookieService: CookieService) { }
 
   get url() {
     return this._router.url;
@@ -74,5 +64,23 @@ export class DashboardComponent implements OnInit {
 
   navigate(route) {
 
+  }
+
+  logout() {
+    const logoutGenericData: TGenericModal = {
+      onConfirmCallback: () => {
+        this._cookieService.deleteAll();
+        this._router.navigate(['']);
+
+      },
+      cancelText: "Cancel",
+      confirmText: "Logout",
+      closeOnSuccess: true,
+      headline: "Are you sure you'd like to log out",
+      icon: "exit_to_app",
+      tagline: "You'd be sent back to the home page"
+    }
+    const loginDialog = this._dialog.open(GenericModalComponent, { data: logoutGenericData, width: '360px', autoFocus: false, disableClose: true })
+    
   }
 }

@@ -5,3 +5,13 @@
 //     @include dialog.max-width(360px, 24px);
 //     @include dialog.shape-radius(0px);
 // }
+
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+

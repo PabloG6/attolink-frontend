@@ -5,13 +5,26 @@
         <mdc-drawer-header title="teenielink.dev" subtitle="Lorem Ipsum Bullshit."></mdc-drawer-header>
 
         <mdc-drawer-content>
+            <mdc-list-divider></mdc-list-divider>
             <mdc-list>
-                <mdc-list-divider></mdc-list-divider>
-                <mdc-list-item *ngFor="let route of routes" [routerLink]="route.endpoint" singleSelection>
+                <mdc-list-item *ngFor="let route of pageRoutes" [routerLink]="route.endpoint" singleSelection>
                     <mdc-icon mdcListItemGraphic *ngIf="route.icon">{{route.icon}}</mdc-icon>
                     <span>{{route.label}}</span>
                 </mdc-list-item>
             </mdc-list>
+           
+            <mdc-list-divider></mdc-list-divider>
+            <h6 mdcListGroupSubheader>Account Info</h6>
+            <mdc-list>
+                <mdc-list-item *ngFor="let route of loginRoutes" [routerLink]="route.endpoint" singleSelection>
+                    <mdc-icon mdcListItemGraphic *ngIf="route.icon">{{route.icon}}</mdc-icon>
+                    <span>{{route.label}}</span>
+                </mdc-list-item>
+                <mdc-list-item value="logout" (click)="logout()">
+                    <mdc-icon mdcListItemGraphic >exit_to_app</mdc-icon>
+                    <span>Logout</span>
+                </mdc-list-item>
+                </mdc-list>
 
         </mdc-drawer-content>
     </mdc-drawer>

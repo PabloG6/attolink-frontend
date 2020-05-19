@@ -39,7 +39,7 @@ export interface TRoutes {
     endpoint: string;
     icon?: string;
     label?: string;
-    lambda?: (val: any) => any
+    callback?: () => any
 }
 
 export interface TWhiteList {
@@ -49,3 +49,15 @@ export interface TWhiteList {
     inserted_at: string;
 }
 
+export interface TGenericModal {
+    icon?: string;
+    headline?: string;
+    tagline?: string;
+    onConfirmCallback: () => any;
+    cancelText?: string;
+    confirmText?: string;
+    closeOnSuccess?: boolean;
+
+
+
+}

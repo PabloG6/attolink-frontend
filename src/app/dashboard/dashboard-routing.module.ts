@@ -19,7 +19,6 @@ const routes: Routes = [
         component: KeysComponent,
         
       },
-
       {
         path: "whitelisted",
         component: WhitelistComponent,
@@ -27,13 +26,18 @@ const routes: Routes = [
       },
 
       {
-        path: "settings",
+        path: "account",
         component: SettingsComponent
       },
       {
         path: 'documentation',
         component: DocumentationComponent,
-      }
+      },
+      {
+        path: "",
+        redirectTo: "documentation",
+        pathMatch: "full"
+      },
     ]
     
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { Observable } from 'rxjs';
-import { TWhiteList } from '../models';
+import { TWhiteList, TResponse, TPermission } from '../models';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { FormBuilder, Validators, FormGroup, AbstractControl, NgForm, FormGroupDirective, FormControl } from '@angular/forms';
@@ -22,6 +22,7 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   private _subs = new SubSink();
   displayedColumns: string[] = ["date created", "keys"]
   loadingImage: boolean;
+  $permissions: Observable<TResponse<TPermission>>
   @ViewChild('originSelect', {static: true}) originSelect: MdcSelect;
   originTypes = [
     {origin_name: "ipv4", origin_type: "ipv4", placeholder: "Enter your ipv4 address"},
@@ -29,8 +30,9 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   ]
   whitelistFormGroup: FormGroup;
   whiteListMatcher = new WhiteListErrorStateMatcher();
-  restrictedControl: FormControl = new FormControl('all');
+  restrictedControl: FormControl = new FormControl(null);
   private _placeholder: string;
+  subsink = new SubSink();
   constructor(private _api: ApiService, private _matDialog: MatDialog, private _fb: FormBuilder) { 
     this.whitelistFormGroup = _fb.group({
       whitelist: ['', [],],
@@ -38,7 +40,6 @@ export class WhitelistComponent implements OnInit, OnDestroy {
     }, {validators: OriginValidators.originPattern});
 
   
-
     
   }
 
@@ -51,11 +52,13 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.$whitelist = this._api.whitelist.list();
-    this._api.whitelist.list().subscribe((res) => {
-    });
-    this._subs.sink = this.$whitelist.subscribe(() => {
 
-    })
+   const getPermissions = this._api.permissions.get().subscribe((response: TResponse<TPermission>) => {
+     console.log(response.data);
+    this.restrictedControl.patchValue(response.data.enable_whitelist)
+   });
+
+   this.subsink.sink = getPermissions;
   }
 
   create(menuForm: FormGroupDirective) {
@@ -82,11 +85,8 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   }
 
 
- 
-
 
   get validationMessage() {
-    console.log(this.whitelistFormGroup.get('whitelist').errors);
     return this.whitelistFormGroup.get('whitelist').errors ? this.whitelistFormGroup.get('whitelist').errors.message: null;
   }
 
@@ -99,7 +99,11 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   }
 
   onRestrictSelectionChange($event: MdcSelectChange): void {
-
+    this._subs.sink = this._api.permissions.update($event.value).subscribe(() => {
+      this._subs.sink = this._api.permissions.get().subscribe((response: TResponse<TPermission>) => {
+        this.restrictedControl.patchValue(response.data.enable_whitelist);
+      })
+    })
   }
 
 

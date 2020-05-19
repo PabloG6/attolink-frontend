@@ -58,6 +58,9 @@ export interface TGenericModal {
     confirmText?: string;
     closeOnSuccess?: boolean;
 
+}
 
-
+export interface TPermission {
+    id?: string;
+    enable_whitelist: 'all' | 'restricted' | 'none';
 }

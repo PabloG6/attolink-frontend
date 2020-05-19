@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
     {
       endpoint: 'account',
       icon: 'settings',
-      label: 'Settings',
+      label: 'Account',
     },
 
 

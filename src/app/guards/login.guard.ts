@@ -27,7 +27,7 @@ export class LoginGuard implements CanActivate, CanLoad {
     return this._api.user.check_token(token).pipe(map((val) => {
       return true;
     },), catchError(error => {
-    console.log(error);
+    this._router.navigate(['/'])
      return of(false)
     }))
   }

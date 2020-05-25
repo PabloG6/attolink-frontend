@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TResponse, TUser, TResponseList, TKey, TWhiteList, TPermission } from '../models';
+import { TResponse, TUser, TResponseList, TKey, TWhiteList, TPermission, TPlan } from '../models';
 import { tap } from 'rxjs/operators';
 import { updateLocale } from 'moment';
 
@@ -9,20 +9,28 @@ import { updateLocale } from 'moment';
   providedIn: 'root'
 })
 export class ApiService {
-
+  
   constructor(private httpClient: HttpClient) { }
 
   /**
    * user namespace
    */
+
+  private _plans: TPlan[] = [];
+
+   get plans() {
+    return this._plans
+  }
   public user = {
   
     /**
      * 
      */
-    signup: (email, password): Observable<TResponse<TUser>> => {
-      return this.httpClient.post<TResponse<TUser>>("/signup", {user: {email: email, password: password}});
+    signup: (params): Observable<TResponse<TUser>> => {
+      return this.httpClient.post<TResponse<TUser>>("/signup", params);
     },
+
+  
 
     login: (email, password): Observable<TResponse<TUser>> => {
       return this.httpClient.post<TResponse<TUser>>("/login", {user: {email: email, password: password}});
@@ -71,13 +79,28 @@ export class ApiService {
     }
   }
 
+
+  public subscriptions = {
+    list_plans: (): Observable<TResponseList<TPlan>> => {
+      return this.httpClient.get<TResponseList<TPlan>>('/v1/plans', ).pipe(tap((val => {
+        this._plans = val.data;
+      })))
+    },
+
+    create: (): void => {
+
+    }
+
+    
+  }
+
   public permissions = {
     create: (permission_type: 'all' | 'restricted' | 'none'): Observable<TResponse<TPermission>> => {
       return this.httpClient.post<TResponse<TPermission>>('/permissions', {permissions: {enable_whitelist: permission_type}})
     },
 
     get: (): Observable<TResponse<TPermission>> => {
-      return this.httpClient.get<TResponse<TPermission>>('/permissions/show');
+      return this.httpClient.get<TResponse<TPermission>>('/permissions');
     },
 
     update: (type: 'all' | 'restricted' | 'none'): Observable<TResponse<TPermission>> => {

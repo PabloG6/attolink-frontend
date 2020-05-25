@@ -1,60 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Plan } from '../models/pricing_plan';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { TServices, TProduct, TResponseList, TPlan, typeServiceMap, TProductMap } from '../models';
+import { ApiService } from '../api/api.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
   styleUrls: ['./pricing.component.scss']
 })
-export class PricingComponent implements OnInit {
+export class PricingComponent implements OnInit, AfterViewInit {
+  loading = false;
+  productsList: TProduct[] = []
+  private _subsink: SubSink = new SubSink();
+  constructor(private _api: ApiService) {
 
-  constructor() { }
-  public pricingPlans: Plan[] = [{
-    preview_limit: 100,
-    cache_limit: {limit: 104_857_600, unit: "MB"},
-    cache_request_limit: 500,
-    price: 0,
-    overage_fees: 0,
-    description: "Personal Use",
-    title: "Free",
+   }
 
 
-  }, {
-    preview_limit: 3000,
-    cache_limit: {limit: 1_073_741_824, unit: "GB"},
-    cache_request_limit: 4000,
-    price: 10,
-    overage_fees: 0.14,
-    description: "Low Volume",
-    title: "Basic",
-    
 
-  },
-
-  {
-    preview_limit: 15000,
-    cache_limit: {limit: 3_221_225_472, unit: "GB"},
-    cache_request_limit: 8000,
-    price: 20,
-    overage_fees: 0.10,
-    description: "Medium Volume",
-    title: "Premium",
-    
-
-  },
-
-  {
-    preview_limit: 100000,
-    cache_limit: {limit: 16_106_127_360, unit: "GB"},
-    cache_request_limit: 50000,
-    price: 75,
-    overage_fees: 0.06,
-    description: "High Volume",
-    title: "Enterprise"
-  }
-];
-
+   products: TProductMap = {};
+   $pricing: Observable<TProduct[]>;
   ngOnInit(): void {
+    this.loading = true;
+    this.$pricing = this._api.subscriptions.list_plans().pipe(map((response: TResponseList<TPlan>) => {
+      const productsList: TProduct[] = []
+      response.data.forEach((plan) => {
+        const val: TServices = typeServiceMap[plan.nickname]
+        const tProduct: TProduct = [val, plan];
+        
+        productsList.push([val, plan]);
+      });
+      productsList.sort((a: TProduct, b: TProduct) => a[1].amount - b[1].amount)
+      return productsList;
+    }));
+
+    this._subsink.sink = this.$pricing.subscribe((response) => {
+      this.loading = false;
+      this.productsList = response;
+    })
+    
   }
+
+  ngAfterViewInit(): void {
+
+  }
+
 
 }

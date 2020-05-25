@@ -8,12 +8,14 @@ import {MDCDataTableModule} from '@angular-mdc/web/data-table';
 import {MdcCheckboxModule} from '@angular-mdc/web/checkbox';
 import {MdcSelectModule} from '@angular-mdc/web/select';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     MdcCheckboxModule,
+    MatProgressSpinnerModule,
     MdcButtonModule,
     MDCDataTableModule,
     MdcListModule,
@@ -46,7 +48,7 @@ import {MatInputModule} from '@angular/material/input';
     MdcDrawerModule,
     MdcTextFieldModule,
     MdcIconModule,
-
+    MatProgressSpinnerModule,
     MdcIconModule,
     MdcDialogModule,
     MdcTypographyModule,

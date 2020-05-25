@@ -29,6 +29,8 @@ export class WhitelistComponent implements OnInit, OnDestroy {
     {origin_name: "url", origin_type: "url" , placeholder: "Enter your domain name"}
   ]
   whitelistFormGroup: FormGroup;
+  loadingRestrictions: boolean = false;
+  loadingCreate: boolean = false;
   whiteListMatcher = new WhiteListErrorStateMatcher();
   restrictedControl: FormControl = new FormControl(null);
   private _placeholder: string;
@@ -62,14 +64,13 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   }
 
   create(menuForm: FormGroupDirective) {
-    this.loadingImage = true;
+    this.loadingCreate = true;
     this._api.whitelist.create(this.whitelistFormGroup.value.whitelist, this.whitelistFormGroup.value.origin_type.origin_name).subscribe(_ => {
       this.$whitelist = this._api.whitelist.list()
       menuForm.resetForm();
       menuForm.reset();
-      this.whitelistFormGroup.get('whitelist').setErrors(null);
+      this.loadingCreate = false;
     }, (response: HttpErrorResponse) => {
-        console.log(response.error);
         const error = response.error;
         if(error['errors']['ip_address'] && this.whitelistFormGroup.get('origin_type').value == 'ipv4') {
           this.whitelistFormGroup.get('whitelist').setErrors({whitelist: "This IP address has already been registered. "})
@@ -80,6 +81,8 @@ export class WhitelistComponent implements OnInit, OnDestroy {
           this.whitelistFormGroup.get('whitelist').setErrors({whitelist: "This url has already already registered. "})
           return;
         }
+
+        this.loadingCreate = false;
 
     });
   }
@@ -99,13 +102,21 @@ export class WhitelistComponent implements OnInit, OnDestroy {
   }
 
   onRestrictSelectionChange($event: MdcSelectChange): void {
+    this.loadingRestrictions = true;
     this._subs.sink = this._api.permissions.update($event.value).subscribe(() => {
       this._subs.sink = this._api.permissions.get().subscribe((response: TResponse<TPermission>) => {
         this.restrictedControl.patchValue(response.data.enable_whitelist);
+        this.loadingRestrictions = false;
+        sessionStorage.setItem('enable_whitelist',  response.data.enable_whitelist)
+      }, _ => {
+        this.loadingRestrictions = false;
       })
     })
   }
 
+  get enable_whitelist() {
+    return sessionStorage.getItem('enable_whitelist');
+  }
 
   delete(whitelist: TWhiteList) {
   

@@ -1,8 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { Identifiers } from '@angular/compiler';
 
 export interface TResponse<T> {
     data: T
 }
+
+
 
 export interface TUser {
     email: string;
@@ -64,3 +67,80 @@ export interface TPermission {
     id?: string;
     enable_whitelist: 'all' | 'restricted' | 'none';
 }
+/**
+ * TPlan stores the plan ids and nicknames
+ */
+export interface TPlan {
+    id: string;
+    nickname: string;
+    amount: number;
+    currency: string;
+
+}
+
+export interface TServices {
+    preview_limit: number;
+    cache_limit?: {limit: number, unit: string};
+    cache_request_limit?: number;
+    overage_fees?: number;
+    is_restrict_ip: boolean;
+    description?: string;
+    
+}
+
+// export type TServicesMap = {
+//     [key in 'Free' | 'Basic' | 'Premium' | 'Enterprise']: TServices
+// }
+
+export const typeServiceMap = {
+    'Free': {
+        
+        preview_limit: 100,  description: 'Personal Use', restrict_ip: 3},
+    'Basic': {
+        preview_limit: 1000, 
+        description: "Low Volume",
+        restrict_ip: 'unlimited'
+    },
+    'Premium': {
+        preview_limit: 3000,
+        description: "Medium Volume",
+        restrict_ip: 'unlimited'
+    },
+
+    'Enterprise': {
+        preview_limit: 10000,
+        description: "High Volume",
+        restrict_ip: 'unlimited'
+    }
+    
+}
+
+
+// export const typeServiceMap: TServicesMap = {
+//     'Free': {
+//         preview_limit: 100,  description: 'Personal Use'},
+//     'Basic': {
+//         preview_limit: 1000, 
+//         description: "Low Volume",
+
+//     },
+//     'Premium': {
+//         preview_limit: 3000,
+//         description: "Medium Volume",
+
+//     },
+
+//     'Enterprise': {
+//         preview_limit: 10000,
+//         description: "Enterprise",
+//     }
+    
+//     }
+/**
+ * TProduct makes a mapping between the plan and the service
+ */
+export interface TProductMap {
+    [key: string]: TProduct
+}
+
+export type TProduct = [TServices, TPlan]

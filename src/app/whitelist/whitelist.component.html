@@ -1,16 +1,16 @@
 <form class="menu-bar" [formGroup]="whitelistFormGroup" #menuForm="ngForm">
     <mdc-form-field fluid class="text-field_100 text-field--restricted__360">
-        <mdc-text-field  formControlName="whitelist" label="Origin"
-            [placeholder]="placeholder"  outlined required [errorStateMatcher]="whiteListMatcher">
+        <mdc-text-field formControlName="whitelist" label="Origin" [placeholder]="placeholder" outlined required
+            [errorStateMatcher]="whiteListMatcher">
 
         </mdc-text-field>
-        <span class="text-field--errors" *ngIf="whitelistFormGroup.invalid && validationMessage != null">{{validationMessage}}</span>
+        <span class="text-field--errors"
+            *ngIf="whitelistFormGroup.invalid && validationMessage != null">{{validationMessage}}</span>
 
     </mdc-form-field>
 
 
     <mdc-select #originSelect placeholder="Origin Type" formControlName="origin_type" class="select--outlined" outlined
-      
         (selectionChange)="onSelectionChange($event)">
         <mdc-menu [anchorMargin]="{top: 54}" class="select-width">
             <mdc-list>
@@ -22,19 +22,24 @@
             </mdc-list>
         </mdc-menu>
     </mdc-select>
-    <button mdc-button unelevated id="create" (click)="create(menuForm)" class="bar-button button-primary button--text-field"
-        [disabled]="whitelistFormGroup.invalid">
+    <button mdc-button unelevated id="create" (click)="create(menuForm)"
+        class="bar-button button-primary button--text-field" [disabled]="whitelistFormGroup.invalid || loadingCreate">
         <mdc-button-label>
             Create Address
         </mdc-button-label>
     </button>
 
+    <mat-spinner diameter="20" *ngIf="loadingCreate"></mat-spinner>
 
 </form>
 <div>
     <div class="text--title__small text--secondary">Restrict IP Setting</div>
-    <mdc-select outlined placeholder="" [formControl]="restrictedControl" (selectionChange)="onRestrictSelectionChange($event)">
-        <mdc-menu [anchorMargin]="{top: 42}" class="select-width" >
+    <mdc-select outlined placeholder="" [formControl]="restrictedControl"
+        (selectionChange)="onRestrictSelectionChange($event)" [disabled]="loadingRestrictions">
+        <mdc-icon mdcSelectIcon *ngIf="loadingRestrictions">
+            <mat-spinner diameter="20"></mat-spinner>
+        </mdc-icon>
+        <mdc-menu [anchorMargin]="{top: 42}" class="select-width">
             <mdc-list>
                 <mdc-list-item value="all">
                     Accept All
@@ -51,7 +56,8 @@
             </mdc-list>
         </mdc-menu>
     </mdc-select>
-    <mdc-data-table style="width: 100%; margin-top: 1.25rem;">
+
+    <mdc-data-table style="width: 100%; margin-top: 1.25rem;" >
         <table mdcDataTableTable>
             <tr mdcDataTableHeaderRow>
                 <th mdcDataTableHeaderCell>Date created</th>
@@ -59,7 +65,7 @@
                 <th mdcDataTableHeaderCell>Origin Type</th>
                 <th mdcDataTableHeaderCell>Settings</th>
             </tr>
-            <tbody mdcDataTableContent>
+            <tbody mdcDataTableContent >
                 <tr mdcDataTableRow *ngFor="let whitelist of ($whitelist | async)?.data ">
                     <td mdcDataTableCell>{{whitelist.inserted_at | date: 'MMMM dd, yyyy'}}</td>
                     <td mdcDataTableCell>

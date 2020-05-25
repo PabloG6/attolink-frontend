@@ -9,7 +9,8 @@ import { SettingsComponent } from '../settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GenericModalComponent } from '../generic-modal/generic-modal.component';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
-
+import { ChangePaymentComponent } from '../change-payment/change-payment.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
     WhitelistComponent,
     SettingsComponent,
     GenericModalComponent,
+    
     DeleteModalComponent,
+    ChangePaymentComponent,
   ],
   imports: [
     CommonModule,

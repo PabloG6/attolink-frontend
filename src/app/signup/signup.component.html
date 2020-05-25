@@ -23,17 +23,17 @@
     
         <div id="price-holder">
             <mdc-form-field  id="price-select">
-                <mdc-select #selectSub placeholder="Price" outlined (selectionChange)="onSelectionChange($event)">
+                <mdc-select [formControl]="priceControl" placeholder="Price" outlined>
                     <mdc-menu [anchorMargin]="{top: 10}" id="price-select-menu">
                         <mdc-list>
-                            <mdc-list-item *ngFor="let subscription of priceSubscriptions" [value]="subscription.name">
-                                {{subscription.name}}
+                            <mdc-list-item *ngFor="let plan of plansList" [value]="plan">
+                                {{plan.nickname}}
                             </mdc-list-item>
                         </mdc-list>
                     </mdc-menu>
                 </mdc-select>
             </mdc-form-field>
-            <span mdcHeadline6>{{selectedPrice | currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
+            <span mdcHeadline6>{{priceControl?.value?.amount /100| currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
         </div>
     
     
@@ -42,7 +42,7 @@
     
         <span mdcCaption id="login-link">Already a Member? <a [routerLink]="['/']" [queryParams]="{login: true}">Log
                 in.</a></span>
-        <button mdc-button unelevated [disabled]="signUpFormGroup.invalid" (click)="signup()">Sign Up</button>
+        <button mdc-button unelevated [disabled]="signUpFormGroup.invalid || !isCardValid" (click)="signup()">Sign Up</button>
       </form>
 </div>
 

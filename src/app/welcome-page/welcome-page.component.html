@@ -15,6 +15,11 @@
             <span mdcButtonLabel>Features</span>
             <mdc-icon>keyboard_arrow_down</mdc-icon>
           </a>
+
+          <a mdc-button outlined class="button-app-bar button" (click)="scrollTo(pricing)">
+            <span mdcButtonLabel>Pricing</span>
+            <mdc-icon>keyboard_arrow_down</mdc-icon>
+          </a>
     
         </mdc-top-app-bar-section>
       </section>
@@ -46,7 +51,7 @@
   
   
   
-    <section id="pricing">
+    <section #pricing>
       <app-pricing></app-pricing>
     </section>
    

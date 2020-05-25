@@ -1,23 +1,38 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Plan} from './../models/pricing_plan';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { TPlan, TServices, TProduct } from '../models';
+import { isNullOrUndefined } from 'util';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-pricing-card',
   templateUrl: './pricing-card.component.html',
   styleUrls: ['./pricing-card.component.scss']
 })
-export class PricingCardComponent implements OnInit {
+export class PricingCardComponent implements OnInit, OnChanges {
 
-  @Input() public pricePlan: Plan;
+  @Input() public product: TProduct;
+  service: TServices;
+  plan: TPlan;
   public cacheLimitPretty: {limit: number, unit: string};
-  constructor() { 
-    console.log(this.pricePlan);
+  constructor(private _router: Router) { 
+ 
   }
-
   ngOnInit(): void {
-    this.cacheLimitPretty = this.convertBytes(this.pricePlan.cache_limit.limit, this.pricePlan.cache_limit.unit);
 
   }
 
+  ngOnChanges(): void {
+    if(this.product) {
+      console.log(this.product);
+      this.service = this.product[0];
+      this.plan = this.product[1];
+
+    }
+
+    if(!isNullOrUndefined(this.product[0].cache_limit))
+      this.cacheLimitPretty = this.convertBytes(this.product[0].cache_limit.limit, this.product[0].cache_limit.unit);
+
+    
+  }
 
 
 
@@ -31,5 +46,9 @@ export class PricingCardComponent implements OnInit {
       convertedSize = size/Math.pow(1024, 3);
     }
     return {limit: convertedSize, unit: type.toUpperCase()}
+  }
+
+  subscribe(): void {
+    this._router.navigate(['signup'], {queryParams: {plan_id: this.plan.id, amount: this.plan.amount}})
   }
 }

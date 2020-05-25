@@ -1,8 +1,9 @@
-<section class="container">
-    <span *ngFor="let plan of pricingPlans">
-        <app-pricing-card [pricePlan] = "plan"></app-pricing-card>
-
-    </span>
-
-
+<div mdcHeadline3>Pricing</div>
+<section class="load--container" *ngIf="loading; else loaded">
+        <mat-spinner diameter="32"></mat-spinner>
 </section>
+<ng-template #loaded>
+        <section class="container">
+                <app-pricing-card [product]="product" *ngFor="let product of productsList"></app-pricing-card>
+        </section>
+</ng-template>

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { Observable, Subscription } from 'rxjs';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-welcome-page',
@@ -11,6 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
+  private _subsink = new SubSink();
   showPassword: boolean = false;
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _dialog: MatDialog) { }
 
@@ -23,8 +25,8 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
     });
 
-    this._subscriptions.push(activatedRoute$);
 
+    this._subsink.sink = activatedRoute$
 
   
   }
@@ -38,8 +40,14 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
     this._router.navigate(["/signup"]);
   }
 
+  scrollTo(element: HTMLElement) {
+    console.log(element);
+    element.scrollIntoView();
+  }
+
+
   ngOnDestroy() {
-    this._subscriptions.forEach((subscription) => subscription.unsubscribe())
+    this._subsink.unsubscribe(); 
   }
 
 }

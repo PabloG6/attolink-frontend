@@ -9,8 +9,10 @@ import { SettingsComponent } from '../settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GenericModalComponent } from '../generic-modal/generic-modal.component';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
-import { ChangePaymentComponent } from '../change-payment/change-payment.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ModifyPlanComponent } from '../modify-plan/modify-plan.component';
+import { PricingCardComponent } from '../pricing/pricing-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     WhitelistComponent,
     SettingsComponent,
     GenericModalComponent,
-    
     DeleteModalComponent,
-    ChangePaymentComponent,
+    ModifyPlanComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +29,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     FormsModule,
     ReactiveFormsModule,
     MdcModule,
+    SharedModule,
 
   ],
   entryComponents: [

@@ -6,6 +6,7 @@ import { KeysComponent } from '../keys/keys.component';
 import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { DocumentationComponent } from '../documentation/documentation.component';
+import { ModifyPlanComponent } from '../modify-plan/modify-plan.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,11 @@ const routes: Routes = [
         redirectTo: "documentation",
         pathMatch: "full"
       },
+
+      {
+        path: "modify-plan",
+        component: ModifyPlanComponent,
+      }
     ]
     
   }

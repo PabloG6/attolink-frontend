@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiInterceptor } from './api/api.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
     DocumentationComponent,
     WelcomePageComponent,
     PricingComponent,
-    PricingCardComponent,
     DemoComponent,
     LoginModalComponent,
     LoginModalComponent,
@@ -47,6 +47,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     NgxStripeModule.forRoot('pk_test_3MvbkHHqMY7UpVvsV6uNDGQq00vgy9Fq89'),
     BrowserAnimationsModule,
     CommonModule,
+    SharedModule,
+
   ],
 
 

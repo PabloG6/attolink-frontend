@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { TPlan, TServices, TProduct } from '../models';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { TPlan, TServices, TProduct, TUser, TResponse } from '../models';
 import { isNullOrUndefined } from 'util';
 import { Router } from '@angular/router';
+import { ApiService } from '../api/api.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-pricing-card',
   templateUrl: './pricing-card.component.html',
@@ -10,12 +12,17 @@ import { Router } from '@angular/router';
 export class PricingCardComponent implements OnInit, OnChanges {
 
   @Input() public product: TProduct;
+  @Input() public callToAction: string;
+  @Input() public isSelected: false;
+  @Output() subscribeClick: EventEmitter<any> = new EventEmitter();
   service: TServices;
+  $user: Observable<TResponse<TUser>>
   plan: TPlan;
   public cacheLimitPretty: {limit: number, unit: string};
-  constructor(private _router: Router) { 
- 
-  }
+  constructor(private _router: Router, private _api: ApiService) { 
+    this.$user = this._api.userInfo;
+
+  } 
   ngOnInit(): void {
 
   }
@@ -49,6 +56,10 @@ export class PricingCardComponent implements OnInit, OnChanges {
   }
 
   subscribe(): void {
-    this._router.navigate(['signup'], {queryParams: {plan_id: this.plan.id, amount: this.plan.amount}})
+    this.subscribeClick.emit(this.plan);
+  }
+
+  get nickname(): string {
+   return this.plan.nickname.toLowerCase()
   }
 }

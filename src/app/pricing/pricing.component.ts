@@ -4,6 +4,7 @@ import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pricing',
@@ -14,7 +15,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   loading = false;
   productsList: TProduct[] = []
   private _subsink: SubSink = new SubSink();
-  constructor(private _api: ApiService) {
+  constructor(private _api: ApiService, private _router: Router) {
 
    }
 
@@ -25,20 +26,24 @@ export class PricingComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loading = true;
     this.$pricing = this._api.subscriptions.list_plans().pipe(map((response: TResponseList<TPlan>) => {
-      const productsList: TProduct[] = []
+      let productsList: TProduct[] = []
       response.data.forEach((plan) => {
         const val: TServices = typeServiceMap[plan.nickname]
         const tProduct: TProduct = [val, plan];
         
         productsList.push([val, plan]);
       });
-      productsList.sort((a: TProduct, b: TProduct) => a[1].amount - b[1].amount)
+      productsList = productsList.sort((a: TProduct, b: TProduct) => a[1].amount - b[1].amount)
       return productsList;
     }));
 
     this._subsink.sink = this.$pricing.subscribe((response) => {
       this.loading = false;
       this.productsList = response;
+    }, (error) => {
+      this.loading = false;
+      //TODO need to create a ux callback to tell the user something went wrong.
+
     })
     
   }
@@ -47,5 +52,10 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
   }
 
+
+  subscribe(plan: TPlan): void {
+    this._router.navigate(['signup'], {queryParams: {plan_id: plan.id, amount: plan.amount}})
+
+  }
 
 }

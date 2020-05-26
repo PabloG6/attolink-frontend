@@ -24,7 +24,7 @@ export class LoginGuard implements CanActivate, CanLoad {
     }
     
     const token = this._cookieService.get(environment.atto_cookie)
-    return this._api.user.check_token(token).pipe(map((val) => {
+    return this._api.user.check_token().pipe(map((val) => {
       return true;
     },), catchError(error => {
     this._router.navigate(['/'])

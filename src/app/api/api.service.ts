@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { TResponse, TUser, TResponseList, TKey, TWhiteList, TPermission, TPlan } from '../models';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { TResponse, TUser, TResponseList, TKey, TWhiteList, TPermission, TPlan, TServices, typeServiceMap, TProduct } from '../models';
 import { tap } from 'rxjs/operators';
-import { updateLocale } from 'moment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private _cookieService: CookieService) { }
 
   /**
    * user namespace
    */
 
   private _plans: TPlan[] = [];
+  private _user: BehaviorSubject<TResponse<TUser>> = new BehaviorSubject(null);
+
+  get userInfo(): Observable<TResponse<TUser>> {
+  
+    return this._user.getValue() ? this._user.asObservable() : this.user.check_token();
+  }
 
    get plans() {
     return this._plans
@@ -40,8 +46,10 @@ export class ApiService {
       return this.httpClient.delete<any>("/delete");
     },
 
-    check_token: (token): Observable<any> => {
-      return this.httpClient.get<any>("/auth/check_token", {});
+    check_token: (): Observable<any> => {
+      return this.httpClient.get<any>("/auth/check_token", {}).pipe(tap((response) => {
+        this._user.next(response);
+      }));
     },
 
     update: (blob) => {
@@ -106,6 +114,18 @@ export class ApiService {
     update: (type: 'all' | 'restricted' | 'none'): Observable<TResponse<TPermission>> => {
       return this.httpClient.put<TResponse<TPermission>>('/permissions', {permissions: {enable_whitelist: type}})
     }  
+  }
+
+  makeProductList(planList: TPlan[]): TProduct[]  {
+    const productsList: TProduct[] = []
+    planList.forEach((plan) => {
+      const val: TServices = typeServiceMap[plan.nickname]
+      const tProduct: TProduct = [val, plan];
+      
+      productsList.push([val, plan]);
+    });
+    productsList.sort((a: TProduct, b: TProduct) => a[1].amount - b[1].amount)
+    return productsList;
   }
 }
 

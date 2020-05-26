@@ -36,9 +36,9 @@ export class DashboardComponent implements OnInit {
 
   loginRoutes: TRoutes[] = [
     {
-      endpoint: 'plans',
+      endpoint: 'modify-plan',
       icon: 'monetization_on',
-      label: 'Upgrade your Plan',
+      label: 'Modify Plan',
     },
 
     {
@@ -49,13 +49,15 @@ export class DashboardComponent implements OnInit {
 
 
   ]
-  constructor(private _router: Router, private _dialog: MatDialog, private _cookieService: CookieService) { }
+  constructor(private _router: Router, private _dialog: MatDialog, private _cookieService: CookieService) { 
+
+  }
 
   get url() {
     return this._router.url;
   }
   ngOnInit(): void {
-    console.log()
+    
   }
 
   onMenuSelect($event): void {

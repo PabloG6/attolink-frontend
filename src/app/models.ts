@@ -11,6 +11,7 @@ export interface TUser {
     email: string;
     token?: string;
     id: string;
+    customer_id?: string;
 }
 
 /**
@@ -116,29 +117,6 @@ export const typeServiceMap = {
 }
 
 
-// export const typeServiceMap: TServicesMap = {
-//     'Free': {
-//         preview_limit: 100,  description: 'Personal Use'},
-//     'Basic': {
-//         preview_limit: 1000, 
-//         description: "Low Volume",
-
-//     },
-//     'Premium': {
-//         preview_limit: 3000,
-//         description: "Medium Volume",
-
-//     },
-
-//     'Enterprise': {
-//         preview_limit: 10000,
-//         description: "Enterprise",
-//     }
-    
-//     }
-/**
- * TProduct makes a mapping between the plan and the service
- */
 export interface TProductMap {
     [key: string]: TProduct
 }

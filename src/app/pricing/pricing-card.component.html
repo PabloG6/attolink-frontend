@@ -1,8 +1,8 @@
-<mdc-card>
+<mdc-card [outlined]="!(isSelected && nickname == ($user | async)?.data?.plan)">
     <div class="card__title">
         <div mdcHeadline5 *ngIf="plan?.nickname">{{plan.nickname}}</div>
         <p class="card__subtitle" *ngIf="service?.description">{{service?.description}}</p>
-        <div *ngIf="plan?.amount">{{(plan?.amount / 100) | currency: 'USD':'symbol'}}/month</div>
+        <div >{{(plan?.amount / 100) | currency: 'USD':'symbol'}}/month</div>
     </div>
 
     <div>
@@ -40,7 +40,12 @@
 
     <mdc-card-actions>
 
-        <button mdc-button raised class="button-primary__stretched" (click)="subscribe()">Get Now</button>
+        <button mdc-button raised class="button-primary__stretched" (click)="subscribe()" [disabled]="isSelected && ($user | async)?.data?.plan == nickname"> 
+            <mdc-button-label>
+            {{(isSelected && ($user | async)?.data?.plan == nickname)? "Already Subscribed": callToAction || "Subscribe" }}
+            </mdc-button-label>
+        
+        </button>
 
     </mdc-card-actions>
 </mdc-card>

@@ -8,10 +8,11 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { tap } from 'rxjs/operators';
-import { concat } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
+import { concat, of } from 'rxjs';
 import { PaymentMethodResult } from 'ngx-stripe/lib/interfaces/payment-intent';
 import { SubSink } from 'subsink';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,7 @@ import { SubSink } from 'subsink';
 export class SignupComponent implements OnInit, AfterViewInit {
   @ViewChild('selectSub', { static: true }) mdcSelect: any;
   showPassword: boolean = false;
-  priceControl: FormControl = new FormControl();
+  priceControl: FormControl = new FormControl({nickname: "Free", amount: "0", currency: "usd"});
   plansList: TPlan[] = []
   elements: Elements;
   stripeFormControl: FormControl = new FormControl();
@@ -55,10 +56,12 @@ export class SignupComponent implements OnInit, AfterViewInit {
     if(this._api.plans.length == 0) {
       const $pricing = this._api.subscriptions.list_plans().subscribe((response) => {
         this.plansList = response.data;
-        this.plansList.sort((a, b) => a.amount - b.amount);
+        this.plansList = this.plansList.sort((a, b) => a.amount - b.amount);
         const plan = this.plansList.find(plan => plan.id == plan_id) || this.plansList.find(plan => plan.nickname.toLowerCase() == "free")
         this.isCardValid = plan.nickname.toLowerCase() == "free" ? true: false;
         this.priceControl.patchValue(plan)
+
+        this._subsink.sink = $pricing;
       });
 
     } else {
@@ -75,13 +78,14 @@ export class SignupComponent implements OnInit, AfterViewInit {
       this.card.unmount();
       this.isCardValid = true;
 
-    } else if (!isNullOrUndefined(this.card)) {
+    } else if(!isNullOrUndefined(this.card)){
       this.card.mount("#stripe-card-element");
       this.isCardValid = false;
+      console.log(this.card)
       console.log(this.isCardValid, 'iscardValid');
       this.card.on('change', (data) => {
-          this.isCardValid = data.complete && !data.errors;
-      });
+        this.isCardValid = data.complete && !data.errors;
+    });
 
     }
     });
@@ -92,7 +96,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this._stripeService.elements(this.elementsOptions).subscribe((elements) => {
+    /**
+     * use a switchMap to chain observables, one after the other in order to prevent a race condition.
+     */
+    this._stripeService.elements(this.elementsOptions).pipe(
+     switchMap((elements) => {
       this.elements = elements;
       if (!this.card) {
 
@@ -112,8 +120,38 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
       }
 
-    });
+     
 
+      return of(elements);
+     }),
+
+     switchMap((elements) => {
+       const plan: TPlan = this.priceControl.value;
+       console.log('plan: ', plan);
+       if(plan.nickname.toLowerCase() == "free") {
+        this.card.unmount();
+        this.isCardValid = true;
+        console.log('free: ', this.card)
+        return of(elements);
+       } 
+
+       console.log('not free', this.card);
+       this.card.mount("#stripe-card-element");
+       this.isCardValid = false;
+       console.log(this.card)
+       console.log(this.isCardValid, 'iscardValid');
+       this.card.on('change', (data) => {
+         this.isCardValid = data.complete && !data.errors;
+       })
+
+       this.card.on('ready', (val) => {
+         console.log("card is ready", val);
+       })
+
+
+       return of(elements);
+     })
+    ).subscribe();
 
   }
 
@@ -130,7 +168,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this._cookieService.set(environment.atto_cookie, response.data.token)
         this._router.navigate(['dashboard'])
       }, (error) => {
-  
+        console.log(error);
       });
 
       this._subsink.sink = $signup
@@ -144,20 +182,20 @@ export class SignupComponent implements OnInit, AfterViewInit {
           this._router.navigate(['dashboard'])
 
         }, (error) => {
-    
+          console.log(error);
         });
 
         this._subsink.sink = $signup;
       });
 
+
+
     }
   }
 
-  signupWithPayment() {
-    
-  }
+ 
   ngOnDestroy() {
-
+    this._subsink.unsubscribe();
   }
 
 

@@ -11,7 +11,6 @@ import { SubSink } from 'subsink';
   styleUrls: ['./welcome-page.component.scss']
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
-  private _subscriptions: Subscription[] = [];
   private _subsink = new SubSink();
   showPassword: boolean = false;
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _dialog: MatDialog) { }
@@ -32,7 +31,6 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-    console.log("login called");
     this._dialog.open(LoginModalComponent, {width: '360px'})
   }
 
@@ -41,7 +39,6 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   scrollTo(element: HTMLElement) {
-    console.log(element);
     element.scrollIntoView();
   }
 

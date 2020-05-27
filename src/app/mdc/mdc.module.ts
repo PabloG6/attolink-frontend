@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcMenuModule, MdcDrawerModule,} from '@angular-mdc/web';
+import { MdcTopAppBarModule, MdcTypographyModule, MdcListModule, MdcIconModule, MdcCardModule, MdcTextFieldModule, MdcDialogModule, MdcElevationModule, MdcMenuModule, MdcDrawerModule, MdcSnackbarModule,} from '@angular-mdc/web';
 import { MdcButtonModule } from '@angular-mdc/web';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MdcIconButtonModule} from '@angular-mdc/web/icon-button';
@@ -16,6 +16,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     CommonModule,
     MdcCheckboxModule,
     MatProgressSpinnerModule,
+    MdcSnackbarModule,
     MdcButtonModule,
     MDCDataTableModule,
     MdcListModule,
@@ -41,6 +42,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MdcIconButtonModule,
     MdcListModule,
     MatInputModule,
+    MdcSnackbarModule,
     MdcSelectModule,
     MdcElevationModule,
     MDCDataTableModule,

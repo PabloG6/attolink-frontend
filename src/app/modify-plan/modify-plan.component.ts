@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SubSink } from 'subsink';
 import { TPlan, TResponseList, TProduct, TResponse, TUser } from '../models';
 import { Observable } from 'rxjs';
+import { MdcSnackbar } from '@angular-mdc/web';
 
 @Component({
   selector: 'app-modify-plan',
@@ -13,10 +14,14 @@ import { Observable } from 'rxjs';
 export class ModifyPlanComponent implements OnInit {
   private _subsink: SubSink = new SubSink();
   productList: TProduct[] = [];
-  constructor(private _api: ApiService, private _cookieService: CookieService) { }
+  constructor(private _api: ApiService, 
+              private _cookieService: CookieService,
+              private _mdcSnackBar: MdcSnackbar) { }
   ngOnInit(): void {
 
-    
+    this._api.userInfo.subscribe((user) => {
+      console.log(user);
+    })
     this._subsink.sink = this._api.subscriptions.list_plans().subscribe((response: TResponseList<TPlan>) => {
       this.productList = this._api.makeProductList(response.data);
 
@@ -25,7 +30,10 @@ export class ModifyPlanComponent implements OnInit {
   }
 
   subscribe(plan: TPlan): void {
-    console.log(plan);
+    this._api.subscriptions.update({plan_id: plan.id}).subscribe((response) => {
+      console.log(response);
+      this._mdcSnackBar.open('We\'ve updated your subscription!', 'OK', {trailing: true, })
+    });
   }
 
 }

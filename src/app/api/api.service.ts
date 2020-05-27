@@ -97,9 +97,11 @@ export class ApiService {
 
     create: (): void => {
 
-    }
+    },
 
-    
+    update: (plans): Observable<TResponse<any>> => {
+      return this.httpClient.put<TResponse<any>>('/subscriptions', {subscriptions: plans})
+    }
   }
 
   public permissions = {

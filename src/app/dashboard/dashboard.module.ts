@@ -23,7 +23,6 @@ import { ResponseExampleComponent } from '../response-example/response-example.c
     GenericModalComponent,
     DeleteModalComponent,
     ModifyPlanComponent,
-    ResponseExampleComponent,
   ],
   imports: [
     CommonModule,

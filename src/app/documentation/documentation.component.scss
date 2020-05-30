@@ -16,31 +16,3 @@
     margin-top: 24px;
 }
 
-pre {
-    outline: 1px solid #ccc;
-    padding: 5px;
-    margin : 5px;
-    max-width: 520px;
-    font-family: unquote($string: "Consolas, monospace");
-}
-
-.string {
-    color: green;
-}
-
-.number {
-    color: darkorange;
-}
-
-.boolean {
-    color: blue;
-}
-
-.null {
-    color: magenta;
-}
-
-.key {
-    color: blue;
-}
-

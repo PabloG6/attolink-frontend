@@ -14,6 +14,7 @@ import { MdcSnackbar } from '@angular-mdc/web';
 export class ModifyPlanComponent implements OnInit {
   private _subsink: SubSink = new SubSink();
   private user: TUser;
+  loading: boolean;
   productList: TProduct[] = [];
   constructor(private _api: ApiService, 
               private _cookieService: CookieService,
@@ -23,10 +24,13 @@ export class ModifyPlanComponent implements OnInit {
       this.user = user;
     })
    
+    this.loading = true;
     this._subsink.sink = this._api.subscriptions.list_plans().subscribe((response: TResponseList<TPlan>) => {
       this.productList = this._api.makeProductList(response.data);
+      this.loading = false;
 
-
+    }, (error) => {
+      this.loading = false;
     });
   }
 

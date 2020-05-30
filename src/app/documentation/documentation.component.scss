@@ -1,16 +1,46 @@
 :host {
     height: 100%;
-    width: 100%;
+    width : 100%;
 }
 
 .code {
-    background: #f5f5f5;
-    padding: 4px 8px;
+    background   : #f5f5f5;
+    padding      : 4px 8px;
     border-radius: 4px;
-    font-family: unquote($string: "Inconsolata, monospace");
+    font-family  : unquote($string: "Inconsolata, monospace");
 }
 
 .example {
-    font-size: 16px;
-    max-width: 640px;
+    font-size : 16px;
+    max-width : 640px;
+    margin-top: 24px;
 }
+
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin : 5px;
+    max-width: 520px;
+    font-family: unquote($string: "Consolas, monospace");
+}
+
+.string {
+    color: green;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: blue;
+}
+

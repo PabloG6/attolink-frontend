@@ -13,6 +13,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ModifyPlanComponent } from '../modify-plan/modify-plan.component';
 import { PricingCardComponent } from '../pricing/pricing-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { ResponseExampleComponent } from '../response-example/response-example.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     GenericModalComponent,
     DeleteModalComponent,
     ModifyPlanComponent,
+    ResponseExampleComponent,
   ],
   imports: [
     CommonModule,

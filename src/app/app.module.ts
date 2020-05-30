@@ -21,6 +21,7 @@ import { ApiInterceptor } from './api/api.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
+import { BeautifyJsonPipe } from './pipes/beautify-json.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SharedModule } from './shared/shared.module';
     LoginModalComponent,
     SignupComponent,
     DashboardComponent,
+ 
   ],
   imports: [
     BrowserModule,

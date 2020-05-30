@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { TResponse, TUser, TResponseList, TKey, TWhiteList, TPermission, TPlan, TServices, typeServiceMap, TProduct } from '../models';
-import { tap } from 'rxjs/operators';
+import { TResponse, TUser, TResponseList, TKey, TWhiteList, TPermission, TPlan, TServices, typeServiceMap, TProduct, TSubscription } from '../models';
+import { tap, map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -17,11 +17,16 @@ export class ApiService {
    */
 
   private _plans: TPlan[] = [];
-  private _user: BehaviorSubject<TResponse<TUser>> = new BehaviorSubject(null);
+  private _user: BehaviorSubject<TUser> = new BehaviorSubject(null);
 
-  get userInfo(): Observable<TResponse<TUser>> {
+  get userInfo(): Observable<TUser> {
   
-    return this._user.getValue() ? this._user.asObservable() : this.user.check_token();
+    return this._user.getValue() ? this._user.asObservable() : this.user.check_token().pipe(map(response => response.data));
+  }
+
+   setUserInfo(user): void {
+    this._user.next(user);
+
   }
 
    get plans() {
@@ -46,9 +51,9 @@ export class ApiService {
       return this.httpClient.delete<any>("/delete");
     },
 
-    check_token: (): Observable<any> => {
+    check_token: (): Observable<TResponse<TUser>> => {
       return this.httpClient.get<any>("/auth/check_token", {}).pipe(tap((response) => {
-        this._user.next(response);
+        this._user.next(response.data);
       }));
     },
 
@@ -99,7 +104,7 @@ export class ApiService {
 
     },
 
-    update: (plans): Observable<TResponse<any>> => {
+    update: (plans): Observable<TResponse<TSubscription>> => {
       return this.httpClient.put<TResponse<any>>('/subscriptions', {subscriptions: plans})
     }
   }

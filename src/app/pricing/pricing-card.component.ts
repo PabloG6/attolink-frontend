@@ -16,11 +16,15 @@ export class PricingCardComponent implements OnInit, OnChanges {
   @Input() public isSelected: false;
   @Output() subscribeClick: EventEmitter<any> = new EventEmitter();
   service: TServices;
-  $user: Observable<TResponse<TUser>>
+  $user: Observable<TUser>;
   plan: TPlan;
   public cacheLimitPretty: {limit: number, unit: string};
   constructor(private _router: Router, private _api: ApiService) { 
     this.$user = this._api.userInfo;
+    this.$user.subscribe(user => {
+      
+      console.log("$user emitted", user);
+    })
 
   } 
   ngOnInit(): void {

@@ -12,6 +12,12 @@ export interface TUser {
     token?: string;
     id: string;
     customer_id?: string;
+    plan?: string;
+}
+
+export interface TSubscription {
+    id?: string;
+    nickname?: string;
 }
 
 /**

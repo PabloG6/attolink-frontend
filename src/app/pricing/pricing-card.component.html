@@ -1,8 +1,10 @@
-<mdc-card [outlined]="!(isSelected && nickname == ($user | async)?.data?.plan)">
+<mdc-card [outlined]="!(isSelected && nickname == ($user | async)?.plan)">
+
+
     <div class="card__title">
         <div mdcHeadline5 *ngIf="plan?.nickname">{{plan.nickname}}</div>
         <p class="card__subtitle" *ngIf="service?.description">{{service?.description}}</p>
-        <div >{{(plan?.amount / 100) | currency: 'USD':'symbol'}}/month</div>
+        <div *ngIf="plan?.amount >= 0">{{(plan?.amount / 100) | currency: 'USD':'symbol'}}/month</div>
     </div>
 
     <div>
@@ -29,7 +31,7 @@
                 additional {{service.overage_fees}}&#162; gb/month in overage fees
             </li>
 
-            <li class="price__offerings">
+            <li class="price__offerings" mdcBody2>
                 SSL Requests
             </li>
 
@@ -40,7 +42,7 @@
 
     <mdc-card-actions>
 
-        <button mdc-button raised class="button-primary__stretched" (click)="subscribe()" [disabled]="isSelected && ($user | async)?.data?.plan == nickname"> 
+        <button mdc-button raised class="button-primary__stretched" (click)="subscribe()" [disabled]="isSelected && ($user | async)?.plan == nickname"> 
             <mdc-button-label>
             {{(isSelected && ($user | async)?.data?.plan == nickname)? "Already Subscribed": callToAction || "Subscribe" }}
             </mdc-button-label>

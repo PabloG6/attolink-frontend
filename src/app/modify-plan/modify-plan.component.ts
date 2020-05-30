@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SubSink } from 'subsink';
-import { TPlan, TResponseList, TProduct, TResponse, TUser } from '../models';
+import { TPlan, TResponseList, TProduct, TResponse, TUser, TSubscription } from '../models';
 import { Observable } from 'rxjs';
 import { MdcSnackbar } from '@angular-mdc/web';
 
@@ -13,15 +13,16 @@ import { MdcSnackbar } from '@angular-mdc/web';
 })
 export class ModifyPlanComponent implements OnInit {
   private _subsink: SubSink = new SubSink();
+  private user: TUser;
   productList: TProduct[] = [];
   constructor(private _api: ApiService, 
               private _cookieService: CookieService,
               private _mdcSnackBar: MdcSnackbar) { }
   ngOnInit(): void {
-
-    this._api.userInfo.subscribe((user) => {
-      console.log(user);
+    this._api.userInfo.subscribe(user => {
+      this.user = user;
     })
+   
     this._subsink.sink = this._api.subscriptions.list_plans().subscribe((response: TResponseList<TPlan>) => {
       this.productList = this._api.makeProductList(response.data);
 
@@ -30,9 +31,15 @@ export class ModifyPlanComponent implements OnInit {
   }
 
   subscribe(plan: TPlan): void {
-    this._api.subscriptions.update({plan_id: plan.id}).subscribe((response) => {
-      console.log(response);
-      this._mdcSnackBar.open('We\'ve updated your subscription!', 'OK', {trailing: true, })
+    this._api.subscriptions.update({plan_id: plan.id}).subscribe((response: TResponse<TSubscription>) => {
+      this.user.plan = response.data.nickname;
+      console.log('this.user ', this.user);
+      console.log('response.data', response.data);
+      this._api.setUserInfo(this.user);
+      this._mdcSnackBar.open('We\'ve updated your subscription!', 'OK');
+
+    }, (error) => {
+      this._mdcSnackBar.open('Whoops! An unexpected error has occured on our part! Try again later', 'OK');
     });
   }
 

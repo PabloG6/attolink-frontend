@@ -1,13 +1,4 @@
-    <h2 mdcHeadline4>Getting a Link Preview of a URL</h2>
-<p mdcBody1>To retrieve a link preview, simply send a Get Request with your 
-    <span class="code">apikey</span> tag in the header and the <span class="code">url</span> as an query parameter</p>
+<div class="markdown">
+    <markdown [src]="'app/content/documentation.md'" (load)="onMarkdownLoad($event)" (error)="onMarkdownError($event)" ngPreserveWhitespaces></markdown>
 
-<h1 mdcHeadline6>Curl GET Request example
-</h1>
-<samp class="code example">
-    curl --verbose  --header "apikey: ddaf02d1-11cd-49c0-a4e6-3a13976315d3" 
-    <br> --request "GET" "https://api.teenielink.dev/v1/preview?url=https://example.com"
-</samp>
-
-<h1 mdcHeadline6>Curl GET Response Example</h1>
-<app-response-example [example]="jsonExample"></app-response-example>
+</div>

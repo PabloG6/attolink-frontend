@@ -1,0 +1,20 @@
+@use "variables";
+.close {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: variables.$error-color-dark;
+}
+
+.error-card {
+    background-color: transparentize(variables.$error-color-background, 0.4);
+    color: variables.$error-color-text;
+    padding: 1.25rem 1rem;
+    border-color: transparentize($color: variables.$error-color-text, $amount: 0.4);
+    border-width: 1.2px;
+}
+
+.error-text {
+    font-weight: 600;
+    margin-top: 1.25rem;
+}

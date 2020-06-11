@@ -21,5 +21,11 @@
 <span id="signup-link" mdcCaption>Don't have an account? <a [routerLink]="['/signup']" (click)="close()">Sign Up
         here.</a></span>
 <mdc-dialog-actions>
-    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="login()" [disabled]="loginForm.invalid">Log in</button>
+    <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
+    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="login()" [disabled]="loginForm.invalid && loading">
+        
+    <mdc-button-label>
+        Log in
+    </mdc-button-label>
+</button>
 </mdc-dialog-actions>

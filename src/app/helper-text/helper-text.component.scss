@@ -1,0 +1,16 @@
+.helper-text {
+    font-size: 0.75rem;
+    color: #b00020;
+    font-weight: 500;
+    padding:  0rem 0.5rem;
+    position: absolute;
+    margin-top: 4px;
+}
+
+
+
+.helper-text::before {
+    content: " ";
+    height: 1rem;
+    margin-left: 2px;
+}

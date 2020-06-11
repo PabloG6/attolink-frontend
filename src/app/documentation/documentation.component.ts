@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-documentation',
@@ -13,9 +14,18 @@ export class DocumentationComponent implements OnInit {
                    title: "Example Domain", 
                    website_url: "example.com" } };
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private _http: HttpClient) { 
   }
 
+  ngOnInit(): void {
+
+  }
+
+  onMarkdownLoad($event):void {
+    console.log($event);
+  }
+
+  onMarkdownError($event): void {
+    console.log($event);
+  }
 }

@@ -10,7 +10,18 @@ export class ApiInterceptor implements HttpInterceptor {
 
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      
+        if(req.url.indexOf('app') != -1) {
+            return next.handle(req);
+        }
+
+        if(req.url.indexOf('assets') != -1) {
+            return next.handle(req);
+        }
+
+        
+        if(req.url.indexOf('content') != -1) {
+            return next.handle(req);
+        }
         req = req.clone(
 
             {

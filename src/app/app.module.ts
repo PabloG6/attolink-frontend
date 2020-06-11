@@ -9,7 +9,6 @@ import { FaqComponent } from './faq/faq.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { PricingComponent } from './pricing/pricing.component';
-import { PricingCardComponent } from './pricing/pricing-card.component';
 import { DemoComponent } from './demo/demo.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginModalComponent } from './login-modal/login-modal.component';

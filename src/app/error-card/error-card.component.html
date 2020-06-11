@@ -1,0 +1,10 @@
+<mdc-card outlined class="error-card" @displayError
+    (@displayError.start)="onDisplayAnimationStart($event)"
+    (@displayError.done)="onDisplayAnimationEnd($event)"
+    *ngIf="display"
+>
+    <button mdcIconButton (click)="close()"  class="close">
+        <mdc-icon>close</mdc-icon>
+    </button>
+    <p mdcBody2 class="error-text" @displayErrorText>{{message || "An Unknown Error has Occured. Either the server has failed to process your request or the server is down, please try again later."}}</p>
+</mdc-card>

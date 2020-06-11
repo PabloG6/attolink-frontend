@@ -1,7 +1,24 @@
 
-<div class="page-container animation--entry--page-container">
-    <span mdcHeadline3 style="margin-top: 12px;" class="animation--entry-title-container">Welcome to <span style="font-family: Inconsolata, monospace">teenielink.dev</span></span>
-    <span mdcHeadline4 class="animation--entry-subtitle-container subtitle">Sign Up.</span>
+<div class="page-container" [@animateSideBanner]="openSideBanner ? 'openSideBan': 'closeSideBan'"
+
+>
+    <div *ngIf="isLoading">
+        
+        <app-loader>
+        </app-loader>
+    
+    </div>
+
+        <div class="container" *ngIf="!isLoading">
+            <span mdcHeadline3 style="margin-top: 12px;" 
+            [@titleAnim]="openSideBanner ? 'dropDown' : 'flyUp'"
+            >Welcome to <span style="font-family: Inconsolata, monospace">teenielink.dev</span></span>
+            <span mdcHeadline4 class="subtitle"
+            [@subtitleAnim]="openSideBanner  ? 'flyUp' : 'dropDown'"
+            >Sign Up.</span>
+        </div>
+
+
 </div>
 
 <!--TODO fix this to have more comprehensive animations-->
@@ -11,46 +28,56 @@
 
 
 <div class="signup-container">
-    <form [formGroup]="signUpFormGroup"  class="signup-holder">
-        <mdc-form-field fluid>
-            <mdc-text-field label="Email" outlined required formControlName="email">
-    
-            </mdc-text-field>
-        </mdc-form-field>
-    
-        <mdc-form-field fluid>
-            <mdc-text-field [type]="showPassword ? 'text' : 'password'" label="Password" outlined required formControlName="password">
-                <button mdcIconButton mdcTextFieldIcon trailing [on]="true" (click)="showPassword = !showPassword">
-                        <mdc-icon mdcIconOn>visibility</mdc-icon>
-                        <mdc-icon>visibility_off</mdc-icon>
-                    </button>
-            </mdc-text-field>
-        </mdc-form-field>
-    
-    
-        <div id="price-holder">
-            <mdc-form-field  id="price-select">
-                <mdc-select [formControl]="priceControl" placeholder="Price" outlined>
-                    <mdc-menu [anchorMargin]="{top: 10}" id="price-select-menu">
-                        <mdc-list>
-                            <mdc-list-item *ngFor="let plan of plansList" [value]="plan">
-                                {{plan.nickname}}
-                            </mdc-list-item>
-                        </mdc-list>
-                    </mdc-menu>
-                </mdc-select>
+    <div class="signup-holder">
+        <form [formGroup]="signUpFormGroup"  class="signup-form">
+            <mdc-form-field fluid>
+                <mdc-text-field label="Email" outlined required formControlName="email">
+        
+                </mdc-text-field>
+                <app-helper-text [show]="email" [message]="emailError"></app-helper-text>
             </mdc-form-field>
-            <span mdcHeadline6>{{priceControl?.value?.amount /100| currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
-        </div>
-    
-    
-            <div id="stripe-card-element" class="field"></div>
-    
-    
-        <span mdcCaption id="login-link">Already a Member? <a [routerLink]="['/']" [queryParams]="{login: true}">Log
-                in.</a></span>
-        <button mdc-button unelevated [disabled]="signUpFormGroup.invalid || !isCardValid" (click)="signup()">Sign Up</button>
-      </form>
+        
+            <mdc-form-field fluid>
+                <mdc-text-field [type]="showPassword ? 'text' : 'password'" label="Password" outlined required formControlName="password">
+                    <button mdcIconButton mdcTextFieldIcon trailing [on]="true" (click)="showPassword = !showPassword">
+                            <mdc-icon mdcIconOn>visibility</mdc-icon>
+                            <mdc-icon>visibility_off</mdc-icon>
+                        </button>
+                </mdc-text-field>
+            </mdc-form-field>
+        
+        
+            <div id="price-holder">
+                <mdc-form-field  id="price-select">
+                    <mdc-select [formControl]="priceControl" placeholder="Price" outlined>
+                        <mdc-menu [anchorMargin]="{top: 10}" id="price-select-menu">
+                            <mdc-list>
+                                <mdc-list-item *ngFor="let plan of plansList" [value]="plan">
+                                    {{plan.nickname}}
+                                </mdc-list-item>
+                            </mdc-list>
+                        </mdc-menu>
+                    </mdc-select>
+                </mdc-form-field>
+                <span mdcHeadline6>{{priceControl?.value?.amount /100| currency:'USD':'symbol':'1.2-2'}}<sub>/month</sub></span>
+            </div>
+        
+        
+                <div id="stripe-card-element" class="field"></div>
+        
+        
+            <span mdcCaption id="login-link">Already a Member? <a [routerLink]="['/']" [queryParams]="{login: true}">Log
+                    in.</a></span>
+            <button mdc-button unelevated [disabled]="signUpFormGroup.invalid || !isCardValid || isLoading" (click)="signup()">Sign Up</button>
+            
+        </form>
+
+        <app-error-card (displayError)="resetFormError()" [display]="isServerError" [message]="errorMessage"></app-error-card>
+
+    </div>
+ 
+
+   
 </div>
 
     

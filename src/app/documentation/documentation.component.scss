@@ -1,6 +1,8 @@
 :host {
     height: 100%;
     width : 100%;
+    padding-top: 64px;
+    padding-bottom: 24px;
 }
 
 .code {
@@ -10,9 +12,25 @@
     font-family  : unquote($string: "Inconsolata, monospace");
 }
 
+.markdown {
+    max-width: 720px;
+}
 .example {
     font-size : 16px;
     max-width : 640px;
     margin-top: 24px;
 }
 
+
+.top-app-bar {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    position: sticky;
+    margin: 0;
+    justify-content: flex-end;
+}
+
+pre[class*="language-"], code[class*="language-"] {
+    max-width: 480px !important;
+}

@@ -21,6 +21,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { BeautifyJsonPipe } from './pipes/beautify-json.pipe';
+import { SendPasswordResetComponent } from './send-password-reset/send-password-reset.component';
+import { EmailSentComponent } from './email-sent/email-sent.component';
+import { PromptDialogComponent } from './prompt-dialog/prompt-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { BeautifyJsonPipe } from './pipes/beautify-json.pipe';
     LoginModalComponent,
     SignupComponent,
     DashboardComponent,
+    SendPasswordResetComponent,
+    EmailSentComponent,
+    PromptDialogComponent,
  
   ],
   imports: [

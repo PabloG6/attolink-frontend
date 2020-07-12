@@ -1,10 +1,13 @@
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 <div class="dialog-content">
-    <mdc-icon class="icon--large">{{data?.icon}}</mdc-icon>
+    <mdc-icon class="icon--large" *ngIf="data?.icon">{{data?.icon}}</mdc-icon>
 <span mdcHeadline5>{{data?.headline}}</span>
-<span mdcBody1 class="text--secondary">{{data?.tagline}}</span>
+<span mdcBody1 class="text--secondary" *ngIf="data?.tagline">{{data?.tagline}}</span>
 </div>
 
 <mat-dialog-actions align="end">
     <button mdcDialogButton mdcDialogAction="accept" unelevated class="neutral-button" mat-dialog-close>{{data?.cancelText}}</button>
-    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="callback()"  class="error-button" >{{data?.confirmText}}</button>
+    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="callback()"  [class]="data?.confirmClass ? data?.confirmClass: 'error-button'" >
+
+        <mdc-button-label>{{data?.confirmText}}</mdc-button-label></button>
 </mat-dialog-actions>

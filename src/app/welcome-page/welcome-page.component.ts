@@ -12,6 +12,7 @@ import { SubSink } from 'subsink';
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
   private _subsink = new SubSink();
+  dialogRef: MatDialogRef<LoginModalComponent>;
   showPassword: boolean = false;
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _dialog: MatDialog) { }
 
@@ -19,7 +20,7 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const activatedRoute$ = this._activatedRoute.queryParams.subscribe((queryParams: Params) => {
       if(queryParams["login"]) {
-        this._dialog.open(LoginModalComponent, {width: '360px',})
+         this.dialogRef = this._dialog.open(LoginModalComponent, {width: '360px',})
       }
 
     });
@@ -31,7 +32,7 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-    this._dialog.open(LoginModalComponent, {width: '360px'})
+    this.dialogRef = this._dialog.open(LoginModalComponent, {width: '360px'})
   }
 
   public signup() {
@@ -45,6 +46,7 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subsink.unsubscribe(); 
+    this.dialogRef.close();
   }
 
 }

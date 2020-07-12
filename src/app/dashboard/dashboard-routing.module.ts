@@ -7,6 +7,7 @@ import { WhitelistComponent } from '../whitelist/whitelist.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { DocumentationComponent } from '../documentation/documentation.component';
 import { ModifyPlanComponent } from '../modify-plan/modify-plan.component';
+import { ConfirmEmailComponent } from '../confirm-email/confirm-email.component';
 
 
 const routes: Routes = [

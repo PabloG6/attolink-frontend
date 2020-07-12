@@ -53,7 +53,7 @@ export class ErrorCardComponent implements OnInit {
 
   @Input() public color: string;
   @Input() public message: string;
-  @Input() public display: string;
+  @Input() public display: boolean;
   @Output() displayError: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
@@ -62,7 +62,6 @@ export class ErrorCardComponent implements OnInit {
 
 
   close() {
-    console.log("emitting energy");
     this.displayError.emit();
   }
 
@@ -73,7 +72,6 @@ export class ErrorCardComponent implements OnInit {
 
   
   onDisplayAnimationEnd(event: AnimationEvent) {
-      console.log(event);
   }
 
 }

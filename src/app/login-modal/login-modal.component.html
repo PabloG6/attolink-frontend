@@ -12,7 +12,7 @@
         </mdc-text-field>
     </mdc-form-field>
     <p>
-        <a [routerLink]="['/password_reset']" mdcCaption>Forgot my password</a>
+        <a [routerLink]="['/send_password_reset']" mdcCaption>Forgot my password</a>
 
     </p>
 </form>
@@ -22,7 +22,7 @@
         here.</a></span>
 <mdc-dialog-actions>
     <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
-    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="login()" [disabled]="loginForm.invalid && loading">
+    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="login()" [disabled]="loginForm.invalid || loading">
         
     <mdc-button-label>
         Log in

@@ -14,6 +14,9 @@ import { ModifyPlanComponent } from '../modify-plan/modify-plan.component';
 import { PricingCardComponent } from '../pricing/pricing-card.component';
 import { SharedModule } from '../shared/shared.module';
 import { ResponseExampleComponent } from '../response-example/response-example.component';
+import { ConfirmEmailComponent } from '../confirm-email/confirm-email.component';
+import { UpdateEmailComponent } from '../update-email/update-email.component';
+import { PasswordResetComponent } from '../password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { ResponseExampleComponent } from '../response-example/response-example.c
     GenericModalComponent,
     DeleteModalComponent,
     ModifyPlanComponent,
+    ConfirmEmailComponent,
+    UpdateEmailComponent,
+    PasswordResetComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +42,8 @@ import { ResponseExampleComponent } from '../response-example/response-example.c
   entryComponents: [
     GenericModalComponent,
     DeleteModalComponent,
+    UpdateEmailComponent,
+    PasswordResetComponent,
   ]
 
 })

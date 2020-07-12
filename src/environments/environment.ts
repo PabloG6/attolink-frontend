@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  rootUrl: 'http://localhost:4000',
+  rootUrl: 'http://localhost:4000/',
   atto_cookie: 'ATTO_COOKIE',
 };
 

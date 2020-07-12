@@ -44,6 +44,10 @@ export class LoginModalComponent implements OnInit, OnDestroy {
         this._cookieService.set(environment.atto_cookie, response.data.token)
         this._router.navigate(['dashboard']);
         this._matDialogRef.close();
+      }, () => {
+        //todo fix this as well looooool
+      
+        this.loading = false;
       })
 
     

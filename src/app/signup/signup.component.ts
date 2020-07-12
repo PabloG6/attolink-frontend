@@ -330,7 +330,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 
   get email() {
-   return this.signUpFormGroup.get('email').errors;
+   return !isNullOrUndefined(this.signUpFormGroup.get('email').errors);
   }
 
 

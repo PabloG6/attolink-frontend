@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Identifiers } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 export interface TResponse<T> {
     data: T
@@ -59,15 +60,24 @@ export interface TWhiteList {
     inserted_at: string;
 }
 
+export type ConfirmCallback = () => any;
+export type AsyncCOnfirmCallback =  ()  => Observable<any>;
 export interface TGenericModal {
     icon?: string;
     headline?: string;
     tagline?: string;
-    onConfirmCallback: () => any;
+    isObservable?: boolean;
+    onConfirmCallback: ConfirmCallback | AsyncCOnfirmCallback;
     cancelText?: string;
     confirmText?: string;
+    confirmClass?: string;
     closeOnSuccess?: boolean;
 
+}
+
+export interface TGenericAccount {
+    prompt?: string;
+    query?: Observable<any>;
 }
 
 export interface TPermission {

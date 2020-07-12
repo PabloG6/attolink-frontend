@@ -1,0 +1,16 @@
+
+<form class="update-form" [formGroup]="updateEmailGroup">
+    <mdc-text-field label="Email" outlined style="margin-bottom: 16px;" formControlName="email">
+
+    </mdc-text-field>
+    <mdc-text-field label="Password" type="password" outlined formControlName="password"> 
+
+    </mdc-text-field>
+</form>
+<mat-dialog-actions >
+    <button mdcDialogButton mdcDialogAction="accept" unelevated class="neutral-button" mat-dialog-close>Cancel</button>
+    <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="ok()"  class="button-primary" [disabled]="loading || updateEmailGroup.invalid" >
+
+        <mdc-button-label>Change</mdc-button-label></button>
+</mat-dialog-actions>
+

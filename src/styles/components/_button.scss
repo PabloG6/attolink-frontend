@@ -30,6 +30,11 @@
     @include button.filled-accessible(#ff313b);
 }
 
+
+.confirm-button {
+    @include button.filled-accessible(#34ad58);
+    color: white !important;
+}
 .neutral-button {
     @include button.filled-accessible(#FDFDFD);
 }

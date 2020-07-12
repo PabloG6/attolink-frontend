@@ -1,7 +1,7 @@
 
 <div class="mdc-drawer-app" #root>
 
-    <mdc-drawer>
+    <mdc-drawer [mdcElevation]="1">
         <mdc-drawer-header title="teenielink.dev" subtitle="Lorem Ipsum Bullshit."></mdc-drawer-header>
 
         <mdc-drawer-content>
@@ -22,6 +22,7 @@
                 </mdc-list-item>
                 <mdc-list-item value="logout" (click)="logout()">
                     <mdc-icon mdcListItemGraphic >exit_to_app</mdc-icon>
+                
                     <span>Logout</span>
                 </mdc-list-item>
                 </mdc-list>

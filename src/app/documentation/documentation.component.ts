@@ -22,10 +22,8 @@ export class DocumentationComponent implements OnInit {
   }
 
   onMarkdownLoad($event):void {
-    console.log($event);
   }
 
   onMarkdownError($event): void {
-    console.log($event);
   }
 }

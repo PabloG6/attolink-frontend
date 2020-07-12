@@ -21,7 +21,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class HelperTextComponent implements OnInit {
   @Input() message: string;
-  @Input() show: string;
+  @Input() show: boolean;
 
   constructor() { }
 

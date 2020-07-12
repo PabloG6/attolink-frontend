@@ -1,0 +1,154 @@
+:host {
+    width: 100%;
+    display: flex;
+    margin: 24px;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.settings{
+    
+    &-card {
+    width: 100%;
+    margin: 16px 0;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    background-color: white;
+    
+    
+    }
+
+    &-info-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 16px;
+
+    }
+
+    &-change-button {
+        margin-left: 12px;
+        padding: 0 24px;
+    }
+
+    &-input {
+        max-width: 440px;
+        width: 100%;
+
+
+
+        &-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 580px;
+            width: 100%;
+        }
+
+    }
+
+    &-button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+
+}
+
+
+.done-button {
+    color: #34ad58;
+    font-size: 24px;
+}
+
+
+span.settings-label::after {
+    content: ":";
+    font-family: unquote("Inconsolata");
+    font-size: 1rem;
+    font-weight: 600;
+ 
+    margin-left: 4px;
+
+}
+
+
+.settings-label-info {
+    font-weight: 500;
+    color: #757575;
+    
+}
+.settings-form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+form.settings-form {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    
+}
+
+mdc-text-field {
+    margin-top: 16px;
+
+}
+span.settings-label-info {
+    margin-right: 4px;
+}
+span.settings-label {
+    font-family: unquote("Inconsolata, monospace");
+    font-size: 1rem;
+    font-weight: 600;
+
+}
+
+
+.password-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    margin: 0.2rem;
+    border-radius: 50%;
+    color: #000;
+    background-color: #000;
+
+}
+#password {
+    justify-content: flex-end;
+}
+
+.password-container {
+    display: inline-flex;
+    margin-right: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.button-container > *:not(:last-child) {
+    margin-right: 12px; 
+} 
+
+.anchor {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+mdc-form-field:not(:last-child) {
+    margin-bottom: 12px;
+}

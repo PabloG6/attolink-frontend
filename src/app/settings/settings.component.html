@@ -1,1 +1,51 @@
-<p>settings works!</p>
+<h1 mdcHeadline5>Account Information</h1>
+<mdc-card outlined class="settings-card">
+    <div class="settings-label-container">
+        <span class="settings-label">Email Address</span>
+        <div class="settings-form">
+            <p class="settings-label-info" mdcBody2>{{user?.email}}</p>
+            <button mdc-button class="button-primary" (click)="updateEmail()">
+                <mdc-button-label>Change</mdc-button-label>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="settings-label-container">
+        <span class="settings-label">Change Password</span>
+        <form class="settings-form" [formGroup]="passwordFormGroup">
+            <mdc-form-field fluid >
+                <mdc-text-field label="Old Password" formControlName="oldPassword" type="password">
+
+                </mdc-text-field>
+                <app-helper-text [show]="oldPasswordErrors" message="Incorrect password"></app-helper-text>
+            </mdc-form-field>
+            <mdc-form-field fluid>
+                <mdc-text-field label="New Password" formControlName="newPassword" type="password">
+                </mdc-text-field>
+                <app-helper-text [show]="passwordFormGroup.errors?.repeatPassword" message="Passwords do not match!"></app-helper-text>
+            </mdc-form-field>
+            <mdc-text-field label="Confirm New Password" formControlName="confirmPassword" type="password">
+            </mdc-text-field>
+
+            <div class="button-container">
+                <mat-spinner [diameter]="24" *ngIf="loadingPassword">
+
+                </mat-spinner>
+
+                <a mdcCaption class="anchor" (click)="forgotPassword()">Forgot Your Password?</a>
+                <button mdc-button class="button-primary" (click)="updatePassword(passwordFormGroup)"
+                    style="max-width: 84px;" [disabled]="passwordFormGroup.invalid || loadingPassword">
+                    <mdc-button-label>Change</mdc-button-label>
+                </button>
+            </div>
+            <app-error-card [display]="passwordFormGroup.errors?.serverError" [message]="passwordErrorMessage" (displayError)="displayError()">
+
+            </app-error-card>
+        </form>
+  
+    </div>
+
+</mdc-card>
+
+<button mdc-button unelevated style="align-self: flex-end" class="error-button" (click)="delete()">Delete My Account</button>

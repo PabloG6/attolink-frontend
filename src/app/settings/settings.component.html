@@ -47,5 +47,9 @@
     </div>
 
 </mdc-card>
-
-<button mdc-button unelevated style="align-self: flex-end" class="error-button" (click)="delete()">Delete My Account</button>
+<div class="button-bar">
+    <mat-spinner [diameter]="24" *ngIf="loadingDelete">
+    </mat-spinner>
+    <button mdc-button unelevated style="align-self: flex-end" class="error-button" (click)="delete()" [disabled]="loadingDelete">Delete My Account</button>
+    
+</div>

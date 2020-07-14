@@ -23,6 +23,10 @@
     
         </mdc-top-app-bar-section>
       </section>
+     <mdc-top-app-bar-section align="end" *ngIf="token; else noToken">
+        <button mdc-button [routerLink]="['dashboard']">Go To Dashboard</button>
+     </mdc-top-app-bar-section>
+     <ng-template #noToken>
       <mdc-top-app-bar-section align="end">
         <a mdc-button unelevated class="button-primary button" (click)="signup()">
           <span mdcButtonLabel >Sign Up</span>
@@ -31,6 +35,7 @@
           Login
         </a>
       </mdc-top-app-bar-section>
+     </ng-template>
     </mdc-top-app-bar-row>
   </mdc-top-app-bar>
   <div #fixedContent class="body-container">

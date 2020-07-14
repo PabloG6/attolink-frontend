@@ -50,7 +50,7 @@ export class ApiService {
     },
 
     delete: (): Observable<any> => {
-      return this.httpClient.delete<any>("delete");
+      return this.httpClient.delete<any>("user/");
     },
 
     check_token: (): Observable<TResponse<TUser>> => {

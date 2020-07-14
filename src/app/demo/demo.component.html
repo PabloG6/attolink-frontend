@@ -1,6 +1,29 @@
 <div mdcHeadline3>Preview any website with a simple click.</div>
 
 <mdc-form-field class="text-field--holder">
-    <mdc-text-field outlined class="demo-text-field--outlined" [formControl]="demoControl"></mdc-text-field>
-    <button mdc-button unelevated class="demo-button" (click)="displayPreview()">Go!</button>
+    <mdc-text-field outlined class="demo-text-field--outlined" [formControl]="demoControl" placeholder="https://example.com"></mdc-text-field>
+    <button mdc-button unelevated class="demo-button" (click)="displayPreview()" [disabled]="this.demoControl.invalid">Go!</button>
 </mdc-form-field>
+
+<mdc-card *ngIf="result">
+    
+    <div class="preview-img" *ngIf="result?.data?.images?.length > 0; else noImage" [style.background-image]="'url(' + result?.data?.images[0]?.url + ')'"></div>
+    <ng-template #noImage>
+       <div class="no-preview-img">
+        <mdc-icon class="preview-img">
+            wallpaper
+        </mdc-icon>
+       </div>
+    </ng-template>
+    <div class="preview-container">
+        <div mdcHeadline6>{{result?.data?.title}}</div>
+    <div mdcSubtitle1>{{result?.data?.website_url}}</div>
+    <div mdcCaption>{{result?.data?.description}}
+    </div>
+    </div>
+
+</mdc-card>
+
+<mdc-card style="height: 140px; justify-content: center; align-items: center;" *ngIf="loading">
+    <app-loader [backgroundColor]="'#6f2dbd'"></app-loader>
+</mdc-card>

@@ -9,6 +9,7 @@
                 <mdc-icon mdcIconOn>visibility</mdc-icon>
                 <mdc-icon>visibility_off</mdc-icon>
             </button>
+
         </mdc-text-field>
     </mdc-form-field>
     <p>
@@ -20,6 +21,9 @@
 
 <span id="signup-link" mdcCaption>Don't have an account? <a [routerLink]="['/signup']" (click)="close()">Sign Up
         here.</a></span>
+<div>
+
+</div>
 <mdc-dialog-actions>
     <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
     <button mdcDialogButton mdcDialogAction="accept" unelevated (click)="login()" [disabled]="loginForm.invalid || loading">

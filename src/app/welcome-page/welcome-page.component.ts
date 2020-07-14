@@ -4,6 +4,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
+import { isNullOrUndefined } from 'util';
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-welcome-page',
@@ -14,7 +17,8 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   private _subsink = new SubSink();
   dialogRef: MatDialogRef<LoginModalComponent>;
   showPassword: boolean = false;
-  constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _dialog: MatDialog) { }
+  constructor(private _router: Router, 
+    private _activatedRoute: ActivatedRoute, private _dialog: MatDialog, private _cookieService: CookieService) { }
 
 
   ngOnInit(): void {
@@ -46,7 +50,14 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subsink.unsubscribe(); 
-    this.dialogRef.close();
+    if(!isNullOrUndefined(this.dialogRef)) {
+      this.dialogRef.close();
+
+    }
   }
 
+
+  get token() {
+    return this._cookieService.get(environment.atto_cookie);
+  }
 }

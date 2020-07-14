@@ -1,1 +1,10 @@
-<p>prompt-dialog works!</p>
+
+<div mdcHeadline6>Delete your account?</div>
+<div mat-dialog-content>
+    <p mdcCaption>Once you delete your account, you won't be able to get it back.</p>
+
+</div>
+<div mat-dialog-buttons align="end">
+    <button mdc-button [mat-dialog-close]="false">Nevermind</button>
+    <button mdc-button unelevated [mat-dialog-close]="true"> Yes, I'm sure. </button>
+</div>

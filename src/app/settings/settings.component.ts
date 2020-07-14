@@ -12,6 +12,8 @@ import { PasswordValidator } from '../validators/confirm_password.validator';
 import { HttpErrorResponse } from '@angular/common/http';
 import { isNullOrUndefined } from 'util';
 import { PromptDialogComponent } from '../prompt-dialog/prompt-dialog.component';
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-settings',
@@ -24,6 +26,7 @@ export class SettingsComponent implements OnInit {
   passwordErrorMessage: string = "Unable to update your password. The server may be down or is currently unable to process your request.";
   passwordFormGroup: FormGroup;
   loadingEmail: boolean;
+  loadingDelete: boolean;
   loadingPassword: boolean;
   @ViewChild("email") emailTextField: MdcTextField;
   user: TUser;
@@ -33,6 +36,7 @@ export class SettingsComponent implements OnInit {
     private _mdcDialog: MatDialog,
     private _cdRef: ChangeDetectorRef,
     private _mdcSnackBar: MdcSnackbar,
+    private _cookieService: CookieService,
     private _fb: FormBuilder) {
     this.user = this._api.getUser();
     this.emailControl.setValue(this.user.email);
@@ -157,11 +161,18 @@ export class SettingsComponent implements OnInit {
 
 
   delete() {
-    this._mdcDialog.open(PromptDialogComponent).afterClosed().subscribe((response) => {
+    this._mdcDialog.open(PromptDialogComponent, {maxWidth: '360px', autoFocus: false}).afterClosed().subscribe((response) => {
+
       if(response==true) {
+        this.loadingDelete = true;
+
         this._api.user.delete().subscribe(() => {
-          this._router.navigate(['dashboard'])
+          this.loadingDelete = false;
+          this._cookieService.delete(environment.atto_cookie);
+          this._router.navigate(['/'])
         }, () => {
+          this.loadingDelete = false;
+
           this._mdcSnackBar.open('An internal server error has occured, please try again later', 'OK')
         })
       }

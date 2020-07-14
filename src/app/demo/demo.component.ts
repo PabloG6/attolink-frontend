@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-demo',
@@ -25,7 +26,7 @@ export class DemoComponent implements OnInit {
   this._http.get('/v1/preview', {
     params: {url: url},
 
-    headers: new HttpHeaders().append('apikey', 'f9187d2c-4b31-4793-b5f8-372149bb5880',) 
+    headers: new HttpHeaders().append('apikey',environment.api_key,) 
   }).subscribe((response) => {
     this.loading = false;
     this.result = response;

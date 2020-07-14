@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   rootUrl: 'http://localhost:4000/',
   atto_cookie: 'ATTO_COOKIE',
+  api_key: 'f9187d2c-4b31-4793-b5f8-372149bb5880',
+  
 };
 
 /*

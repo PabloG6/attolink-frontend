@@ -26,8 +26,8 @@ export class LoginModalComponent implements OnInit, OnDestroy {
     private _mdcSnackBar: MdcSnackbar,
     private _fb: FormBuilder) { 
       this.loginForm = this._fb.group({
-        email: ['genome1@gmail.com', [Validators.required, Validators.email]],
-        password: ['password', [Validators.required, ]]
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, ]]
       })
 
     }

@@ -138,8 +138,8 @@ export class SignupComponent implements OnInit, AfterViewInit {
     private _fb: FormBuilder) {
 
     this.signUpFormGroup = this._fb.group({
-      email: ['grantpablo4@gmail.com', [Validators.required, Validators.email]],
-      password: ['password', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
 
     });
 
@@ -165,7 +165,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 
     this.priceControl.valueChanges.subscribe( plan => {
-      console.log(plan);
      if (plan.nickname == "Free" && this.card) {
       this.card.unmount();
       this.isCardValid = true;
@@ -173,8 +172,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
     } else if(!isNullOrUndefined(this.card)){
       this.card.mount("#stripe-card-element");
       this.isCardValid = false;
-      console.log(this.card)
-      console.log(this.isCardValid, 'iscardValid');
+
       this.card.on('change', (data) => {
         this.isCardValid = data.complete && !data.errors;
     });
@@ -219,25 +217,20 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
      switchMap((elements) => {
        const plan: TPlan = this.priceControl.value;
-       console.log('plan: ', plan);
        if(plan.nickname.toLowerCase() == "free") {
         this.card.unmount();
         this.isCardValid = true;
-        console.log('free: ', this.card)
-        return of(elements);
+=        return of(elements);
        } 
 
-       console.log('not free', this.card);
        this.card.mount("#stripe-card-element");
        this.isCardValid = false;
-       console.log(this.card)
-       console.log(this.isCardValid, 'iscardValid');
+ 
        this.card.on('change', (data) => {
          this.isCardValid = data.complete && !data.errors;
        })
 
        this.card.on('ready', (val) => {
-         console.log("card is ready", val);
        })
 
 
@@ -273,7 +266,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this._router.navigate(['dashboard'])
       }, (message: HttpErrorResponse) => {
         this.isLoading = false;
-        console.log(message);
         switch(message.status) {
           case 0: {
             this.errorMessage = "The server returned no response. The server may be down, or is experiencing too much traffic. Please try again later."

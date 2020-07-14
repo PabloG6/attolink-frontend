@@ -40,7 +40,6 @@ export class SettingsComponent implements OnInit {
     private _fb: FormBuilder) {
     this.user = this._api.getUser();
     this.emailControl.setValue(this.user.email);
-    console.log(this.user);
     this.passwordFormGroup = _fb.group({
       oldPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required]],
@@ -79,7 +78,6 @@ export class SettingsComponent implements OnInit {
   
 
   get valid() {
-    console.log(this.emailControl);
     return this.emailControl.valid && this.emailControl.value != this.user.email
   }
 
@@ -89,7 +87,6 @@ export class SettingsComponent implements OnInit {
 
 
   submitChange(blob: any) {
-    console.log("change");
     const data: TGenericAccount = {
       prompt: "Are you sure you'd like to change your email",
 
@@ -100,11 +97,9 @@ export class SettingsComponent implements OnInit {
 
       if (isSuccess) {
         this._api.email.update_email(blob).subscribe(() => {
-          console.log("success");
           this.loadingEmail = false;
 
         }, (error) => {
-          console.log("failed", error);
         })
       }
     }
@@ -116,7 +111,6 @@ export class SettingsComponent implements OnInit {
 
   displayError() {
     this.passwordFormGroup.clearValidators();
-    console.log(this.passwordFormGroup);
   }
 
   updateEmail() {
@@ -136,7 +130,6 @@ export class SettingsComponent implements OnInit {
       this._mdcSnackBar.open("Successfully updated your password!", "OK");
     }, (response: HttpErrorResponse) => {
       this.loadingPassword = false;
-      console.log(response);
       if(response.status == 401) {
         if(response.error.data.code == "invalid_password") {
          this.passwordFormGroup.controls.oldPassword.setErrors({invalid_password: true});

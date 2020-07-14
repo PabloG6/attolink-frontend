@@ -56,7 +56,6 @@ export class WhitelistComponent implements OnInit, OnDestroy {
     this.$whitelist = this._api.whitelist.list();
 
    const getPermissions = this._api.permissions.get().subscribe((response: TResponse<TPermission>) => {
-     console.log(response.data);
     this.restrictedControl.patchValue(response.data.enable_whitelist)
    });
 

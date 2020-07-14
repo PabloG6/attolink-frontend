@@ -18,9 +18,7 @@ export class DeleteModalComponent implements OnInit {
   }
 
   delete() {
-    console.log(this.data);
    this.data.observable.subscribe(() => {
-     console.log("check for success");
     this._dialogRef.close({success: true});
 
    })

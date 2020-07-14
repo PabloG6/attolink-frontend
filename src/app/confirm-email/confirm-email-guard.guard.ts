@@ -15,7 +15,7 @@ export class ConfirmEmailGuardGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log("confirm email guard")
+      ("confirm email guard")
       const id = next.paramMap.get("id");
       this._api.user.confirm_email(id).pipe(map(val => true), catchError(error => {
         this._router.navigate(['/random-error'])

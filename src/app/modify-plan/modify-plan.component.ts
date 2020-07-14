@@ -37,8 +37,7 @@ export class ModifyPlanComponent implements OnInit {
   subscribe(plan: TPlan): void {
     this._api.subscriptions.update({plan_id: plan.id}).subscribe((response: TResponse<TSubscription>) => {
       this.user.plan = response.data.nickname;
-      console.log('this.user ', this.user);
-      console.log('response.data', response.data);
+
       this._api.setUserInfo(this.user);
       this._mdcSnackBar.open('We\'ve updated your subscription!', 'OK');
 

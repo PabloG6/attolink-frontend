@@ -42,11 +42,11 @@ export class ApiService {
      * 
      */
     signup: (params): Observable<TResponse<TUser>> => {
-      return this.httpClient.post<TResponse<TUser>>("/signup", params);
+      return this.httpClient.post<TResponse<TUser>>("signup", params);
     },
 
     login: (email, password): Observable<TResponse<TUser>> => {
-      return this.httpClient.post<TResponse<TUser>>("/login", {user: {email: email, password: password}});
+      return this.httpClient.post<TResponse<TUser>>("login", {user: {email: email, password: password}});
     },
 
     delete: (): Observable<any> => {
@@ -86,7 +86,7 @@ export class ApiService {
     },
 
     delete: (id): Observable<any> => {
-      return this.httpClient.delete(`keys/${id}`).pipe(tap(res =>  console.log(res)));
+      return this.httpClient.delete(`keys/${id}`).pipe(tap(res => res));
       
     },
     

@@ -17,7 +17,6 @@ export class GenericModalComponent implements OnInit {
 
   callback(): void {
     this.data.onConfirmCallback()
-    console.log(this.data);
     if (this.data.closeOnSuccess) {
       this._dialogRef.close();
     }

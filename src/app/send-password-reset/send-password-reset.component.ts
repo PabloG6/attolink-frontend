@@ -19,8 +19,6 @@ export class SendPasswordResetComponent implements OnInit {
   }
 
   confirm() {
-    console.log(this.formControl)
-    console.log({password: {email: this.formControl.value.email}});
     this._api.password.create({password: {email: this.formControl.value}}).subscribe(() => {
       this._router.navigate(['email_sent'])
     }, () => {

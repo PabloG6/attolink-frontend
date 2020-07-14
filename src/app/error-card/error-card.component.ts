@@ -66,7 +66,6 @@ export class ErrorCardComponent implements OnInit {
   }
 
   onDisplayAnimationStart(event: AnimationEvent) {
-    console.log(event);
 
   }
 

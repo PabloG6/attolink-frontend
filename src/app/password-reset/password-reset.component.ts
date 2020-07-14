@@ -42,7 +42,6 @@ export class PasswordResetComponent implements OnInit {
     this.loading = true;
     this._api.password.forgot_password(this.id, {password: this.passwordResetGroup.value.newPassword}).subscribe((response: any) => {
       //todo force login here.
-      console.log(response);
       this._cookieService.set(environment.atto_cookie,
         response.token);
       this._router.navigate(['dashboard'])

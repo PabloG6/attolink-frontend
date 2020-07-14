@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onMenuSelect($event): void {
-    console.log($event);
+    ($event);
   }
 
   navigate(route) {

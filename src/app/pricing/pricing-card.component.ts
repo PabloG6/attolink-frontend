@@ -23,7 +23,6 @@ export class PricingCardComponent implements OnInit, OnChanges {
     this.$user = this._api.userInfo;
     this.$user.subscribe(user => {
       
-      console.log("$user emitted", user);
     })
 
   } 
@@ -33,7 +32,6 @@ export class PricingCardComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if(this.product) {
-      console.log(this.product);
       this.service = this.product[0];
       this.plan = this.product[1];
 

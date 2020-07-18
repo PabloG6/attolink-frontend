@@ -9,15 +9,13 @@ import { Observable } from 'rxjs';
   templateUrl: './pricing-card.component.html',
   styleUrls: ['./pricing-card.component.scss']
 })
-export class PricingCardComponent implements OnInit, OnChanges {
+export class PricingCardComponent implements OnInit {
 
   @Input() public product: TProduct;
   @Input() public callToAction: string;
   @Input() public isSelected: false;
   @Output() subscribeClick: EventEmitter<any> = new EventEmitter();
-  service: TServices;
   $user: Observable<TUser>;
-  plan: TPlan;
   public cacheLimitPretty: {limit: number, unit: string};
   constructor(private _router: Router, private _api: ApiService) { 
     this.$user = this._api.userInfo;
@@ -30,18 +28,7 @@ export class PricingCardComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges(): void {
-    if(this.product) {
-      this.service = this.product[0];
-      this.plan = this.product[1];
-
-    }
-
-    if(!isNullOrUndefined(this.product[0].cache_limit))
-      this.cacheLimitPretty = this.convertBytes(this.product[0].cache_limit.limit, this.product[0].cache_limit.unit);
-
-    
-  }
+  
 
 
 
@@ -58,10 +45,10 @@ export class PricingCardComponent implements OnInit, OnChanges {
   }
 
   subscribe(): void {
-    this.subscribeClick.emit(this.plan);
+    this.subscribeClick.emit(this.product);
   }
 
   get nickname(): string {
-   return this.plan.nickname.toLowerCase()
+   return this.product.nickname.toLowerCase()
   }
 }

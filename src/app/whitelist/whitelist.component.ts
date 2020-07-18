@@ -110,6 +110,8 @@ export class WhitelistComponent implements OnInit, OnDestroy {
       }, _ => {
         this.loadingRestrictions = false;
       })
+    }, () => {
+      this.loadingRestrictions = false;
     })
   }
 

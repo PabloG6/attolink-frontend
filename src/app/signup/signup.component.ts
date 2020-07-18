@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { AttoSubscription, TResponse, TUser, TPlan, TResponseList } from '../models';
+import { AttoSubscription, TResponse, TUser, TPlan, TResponseList, TProduct } from '../models';
 import { CookieService } from 'ngx-cookie-service';
 import { MdcListSelectionChange, MdcSelectChange, MdcSelect } from '@angular-mdc/web';
 import { Elements, Element as StripeElement, StripeService, ElementsOptions } from 'ngx-stripe';
@@ -111,7 +111,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
   @ViewChild('selectSub', { static: true }) mdcSelect: any;
   showPassword: boolean = false;
   priceControl: FormControl = new FormControl({nickname: "Free", amount: "0", currency: "usd"});
-  plansList: TPlan[] = []
+  plansList: TProduct[] = []
   elements: Elements;
   stripeFormControl: FormControl = new FormControl();
   card: StripeElement;
@@ -145,23 +145,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
     const plan_id = this._activatedRoute.snapshot.queryParamMap.get('plan_id');
     this.isCardValid = plan_id ? false: true;
-    if(this._api.plans.length == 0) {
-      const $pricing = this._api.subscriptions.list_plans().subscribe((response) => {
-        this.plansList = response.data;
-        this.plansList = this.plansList.sort((a, b) => a.amount - b.amount);
-        const plan = this.plansList.find(plan => plan.id == plan_id) || this.plansList.find(plan => plan.nickname.toLowerCase() == "free")
-        this.isCardValid = plan.nickname.toLowerCase() == "free" ? true: false;
-        this.priceControl.patchValue(plan)
-
-        this._subsink.sink = $pricing;
-      });
-
-    } else {
-      this.plansList = this._api.plans;
+      this.plansList = environment.products;
       const plan = this.plansList.find(plan => plan.id == plan_id) || this.plansList.find(plan => plan.nickname.toLowerCase() == "free")
       this.priceControl.patchValue(plan);
      
-    }
+    
 
 
     this.priceControl.valueChanges.subscribe( plan => {
@@ -322,7 +310,8 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 
   get email() {
-   return !isNullOrUndefined(this.signUpFormGroup.get('email').errors);
+   console.log(this.signUpFormGroup.get('email').errors)
+   return this.signUpFormGroup.get('email').errors;
   }
 
 

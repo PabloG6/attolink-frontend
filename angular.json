@@ -130,6 +130,11 @@
           "configurations": {
             "production": {
               "browserTarget": "attolink:build:production"
+            
+            },
+
+            "staging": {
+              "browserTarget": "attolink:build:staging"
             }
           }
         },

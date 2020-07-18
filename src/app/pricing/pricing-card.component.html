@@ -2,16 +2,15 @@
 
 
     <div class="card__title">
-        <div mdcHeadline5 *ngIf="plan?.nickname">{{plan.nickname}}</div>
-        <p class="card__subtitle" *ngIf="service?.description">{{service?.description}}</p>
-        <div *ngIf="plan?.amount >= 0">{{(plan?.amount / 100) | currency: 'USD':'symbol'}}/month</div>
+        <div mdcHeadline5 *ngIf="product?.nickname">{{product.nickname}}</div>
+        <p class="card__subtitle" *ngIf="product ?.description">{{product?.description}}</p>
+        <div *ngIf="product?.amount >= 0">{{(product?.amount / 100) | currency: 'USD':'symbol'}}/month</div>
     </div>
 
     <div>
         <ul>
-            <li class="price__offerings" mdcBody2 *ngIf="service?.preview_limit">
-                {{service?.preview_limit}} requests/hour
-
+            <li class="price__offerings" mdcBody2 *ngIf="product?.preview_limit">
+                {{product?.preview_limit}} requests/hour
             </li>
             <li class="price__offerings" mdcBody2>
                 Unlimited IP Whitelisting
@@ -20,15 +19,10 @@
                 Unlimited Api Keys
             </li>
 
-            <li class="price__offerings" mdcBody2 *ngIf="cacheLimitPretty">
-                {{cacheLimitPretty.limit}}{{cacheLimitPretty.unit}}/month cache storage
-            </li>
-
-            <li class="price__offerings" mdcBody2 *ngIf="service?.cache_request_limit">
-                {{service.cache_request_limit}} cached web requests
-            </li>
-            <li *ngIf="service?.overage_fees && service?.overage_fees != 0" class="price__offerings" mdcBody2 >
-                additional {{service.overage_fees}}&#162; gb/month in overage fees
+    
+           
+            <li *ngIf="product?.overage_fees && product?.overage_fees != 0" class="price__offerings" mdcBody2 >
+                additional {{product?.overage_fees}}&#162; gb/month in overage fees
             </li>
 
             <li class="price__offerings" mdcBody2>

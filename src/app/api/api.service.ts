@@ -86,7 +86,7 @@ export class ApiService {
     },
 
     delete: (id): Observable<any> => {
-      return this.httpClient.delete(`keys/${id}`).pipe(tap(res => res));
+      return this.httpClient.delete(`keys/${id}`).pipe(tap(res =>  console.log()));
       
     },
     
@@ -159,16 +159,6 @@ export class ApiService {
     },
 
   }
-  makeProductList(planList: TPlan[]): TProduct[]  {
-    const productsList: TProduct[] = []
-    planList.forEach((plan) => {
-      const val: TServices = typeServiceMap[plan.nickname]
-      const tProduct: TProduct = [val, plan];
-      
-      productsList.push([val, plan]);
-    });
-    productsList.sort((a: TProduct, b: TProduct) => a[1].amount - b[1].amount)
-    return productsList;
-  }
+ 
 }
 

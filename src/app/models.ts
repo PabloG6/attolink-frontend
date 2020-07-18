@@ -111,20 +111,30 @@ export interface TServices {
 
 export const typeServiceMap = {
     'Free': {
-        
-        preview_limit: 100,  description: 'Personal Use', restrict_ip: 3},
+        amount: 0,
+        nickname: "Free",
+        preview_limit: 100,  
+        description: 'Personal Use',
+         restrict_ip: 3},
     'Basic': {
         preview_limit: 1000, 
+        amount: 999,
         description: "Low Volume",
-        restrict_ip: 'unlimited'
+        restrict_ip: 'unlimited',
+        nickname: "Basic"
     },
     'Premium': {
         preview_limit: 3000,
         description: "Medium Volume",
-        restrict_ip: 'unlimited'
+        restrict_ip: 'unlimited',
+        nickname: "Premium",
+        
+        amount: 1999
     },
 
     'Enterprise': {
+        amount: 9999,
+        nickname: "Enterprise",
         preview_limit: 10000,
         description: "High Volume",
         restrict_ip: 'unlimited'
@@ -137,4 +147,13 @@ export interface TProductMap {
     [key: string]: TProduct
 }
 
-export type TProduct = [TServices, TPlan]
+export interface TProduct {
+    id: string;
+    nickname: string;
+    amount: number,
+    preview_limit: number,
+    restrict_ip: number | String,
+    description?: string;
+    overage_fees?: string;
+
+} 

@@ -60,7 +60,6 @@ import { PromptDialogComponent } from './prompt-dialog/prompt-dialog.component';
 
 
   entryComponents: [
-
     LoginModalComponent,
   ],
   providers: [{

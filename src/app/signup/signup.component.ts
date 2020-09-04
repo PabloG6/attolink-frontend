@@ -246,15 +246,17 @@ export class SignupComponent implements OnInit, AfterViewInit {
  
   signup() {
     this.isLoading = true;
+    console.log("sign up lol");
     if(this.priceControl.value && (<TPlan>this.priceControl.value).nickname.toLowerCase() == "free") {
 
       const $signup = this._api.user.signup({user: {email: this.signUpFormGroup.value.email, password: this.signUpFormGroup.value.password}, payments: {plan: (<TPlan>this.priceControl.value).id}}).subscribe((response: TResponse<TUser>) => {
         this.isLoading = false;
         this._cookieService.set(environment.atto_cookie, response.data.token)
         this._router.navigate(['dashboard'])
-      }, (message: HttpErrorResponse) => {
+      }, (httpError: HttpErrorResponse) => {
         this.isLoading = false;
-        switch(message.status) {
+        console.log("sign up error message", httpError);
+        switch(httpError.status) {
           case 0: {
             this.errorMessage = "The server returned no response. The server may be down, or is experiencing too much traffic. Please try again later."
 
@@ -263,13 +265,28 @@ export class SignupComponent implements OnInit, AfterViewInit {
           }
 
           case 500: {
-            this.errorMessage = "An internal server error has occured. The server may have crashed or is unable to process your request." 
-            this.isServerError = true;
-            break;
+
+            switch(httpError.error.code) {
+              case "sendgrid_error":
+                this.errorMessage = httpError.error.message;
+                this.isServerError = true;
+                break;
+
+              case "payment_error":
+                this.errorMessage = httpError.error.message;
+                this.isServerError = true;
+                break;
+              default:
+                this.errorMessage = "An internal server error has occured. The server may have crashed or is unable to process your request." 
+                this.isServerError = true;
+                break;
+            }
+            
+            
           }
         
           case 422: {
-            if(message.error.errors['email']) {
+            if(httpError.error.errors['email']) {
               this.signUpFormGroup.get('email').setErrors({emailExists: true})
             }
             break;
@@ -310,7 +327,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 
   get email() {
-   console.log(this.signUpFormGroup.get('email').errors)
    return this.signUpFormGroup.get('email').errors;
   }
 

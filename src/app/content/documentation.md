@@ -5,7 +5,7 @@
 
 ```bash
     curl -X GET "https://api.teenielink.dev/v1/preview?url=https://example.com" 
-     --user "apikey: YOUR API KEY"        
+     --user "teenie-api-key: YOUR API KEY"        
 ```
 
 
@@ -18,7 +18,7 @@
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     headers: {
       'Content-Type': 'application/json',
-      'apikey': 'YOUR API KEY'
+      'teenie-api-key': 'YOUR API KEY'
     },
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   });
@@ -27,7 +27,7 @@
 #### Python Example
 ```python
 import requests
-headers = {'content-type': 'application/json', 'apikey': 'YOUR API KEY'}
+headers = {'content-type': 'application/json', 'teenie-api-key': 'YOUR API KEY'}
 payload = {'url': 'https://example.com'}
 r = requests.get('https://api.teenielink.dev/v1/preview', params=payload, headers=headers)
 print(r)

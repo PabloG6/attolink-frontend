@@ -28,7 +28,7 @@ export class ModifyPlanComponent implements OnInit {
       this.user = user;
     })
    
-    this.loading = true;
+
     
   }
 

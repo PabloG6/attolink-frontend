@@ -1,10 +1,10 @@
 <h1>Modify Your Subscription Plan</h1>
 <span mdcCaption>Upgrade, Downgrade, or Cancel your Payment Plan</span>
-<div class="loader" *ngIf="loading; else products">
+<!-- <div class="loader" *ngIf="loading; else products">
     <mat-spinner diameter="48"></mat-spinner>
-</div>
-<ng-template #products>
+</div> -->
+
     <div class="grid-container">
         <app-pricing-card *ngFor="let product of productList" (subscribeClick)="subscribe($event)" [callToAction]="'Subscribe'" [product]="product" [isSelected]="true"></app-pricing-card>
     </div>
-</ng-template>
+
